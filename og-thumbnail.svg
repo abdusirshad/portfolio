@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="627" viewBox="0 0 1200 627">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0ea5e9"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:0.05"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="627" fill="url(#bg)"/>
+
+  <!-- Glow circle top-right -->
+  <ellipse cx="1050" cy="100" rx="300" ry="200" fill="#0ea5e9" opacity="0.06"/>
+  <!-- Glow circle bottom-left -->
+  <ellipse cx="150" cy="530" rx="250" ry="180" fill="#a78bfa" opacity="0.06"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#accent)"/>
+
+  <!-- Left border accent -->
+  <rect x="72" y="80" width="4" height="200" fill="url(#accent)" rx="2"/>
+
+  <!-- Name -->
+  <text x="100" y="160" font-family="'Segoe UI', Arial, sans-serif" font-size="64" font-weight="800" fill="#f0f6fc" letter-spacing="-1">Md. Irshad</text>
+
+  <!-- Title -->
+  <text x="100" y="215" font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="400" fill="#0ea5e9" letter-spacing="0.5">Senior Cloud, DevOps &amp; AI Platform Engineer</text>
+
+  <!-- Divider -->
+  <rect x="100" y="240" width="500" height="1" fill="#30363d"/>
+
+  <!-- Stats row -->
+  <text x="100" y="290" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#8b949e">7+ Years Experience</text>
+  <rect x="280" y="274" width="1" height="22" fill="#30363d"/>
+  <text x="294" y="290" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#8b949e">AWS &amp; Azure</text>
+  <rect x="420" y="274" width="1" height="22" fill="#30363d"/>
+  <text x="434" y="290" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#8b949e">CKA · AZ-104</text>
+
+  <!-- Tags row 1 -->
+  <rect x="100" y="325" width="130" height="34" rx="17" fill="#1c2128" stroke="#0ea5e9" stroke-width="1" opacity="0.9"/>
+  <text x="165" y="347" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#0ea5e9" text-anchor="middle">Kubernetes</text>
+
+  <rect x="244" y="325" width="110" height="34" rx="17" fill="#1c2128" stroke="#0ea5e9" stroke-width="1" opacity="0.9"/>
+  <text x="299" y="347" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#0ea5e9" text-anchor="middle">Terraform</text>
+
+  <rect x="368" y="325" width="90" height="34" rx="17" fill="#1c2128" stroke="#0ea5e9" stroke-width="1" opacity="0.9"/>
+  <text x="413" y="347" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#0ea5e9" text-anchor="middle">MLOps</text>
+
+  <rect x="472" y="325" width="90" height="34" rx="17" fill="#1c2128" stroke="#0ea5e9" stroke-width="1" opacity="0.9"/>
+  <text x="517" y="347" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#0ea5e9" text-anchor="middle">CI/CD</text>
+
+  <rect x="576" y="325" width="130" height="34" rx="17" fill="#1c2128" stroke="#a78bfa" stroke-width="1" opacity="0.9"/>
+  <text x="641" y="347" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#a78bfa" text-anchor="middle">RAG / LLMs</text>
+
+  <rect x="720" y="325" width="140" height="34" rx="17" fill="#1c2128" stroke="#a78bfa" stroke-width="1" opacity="0.9"/>
+  <text x="790" y="347" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#a78bfa" text-anchor="middle">DevSecOps</text>
+
+  <!-- Tags row 2 -->
+  <rect x="100" y="373" width="160" height="34" rx="17" fill="#1c2128" stroke="#30363d" stroke-width="1"/>
+  <text x="180" y="395" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#8b949e" text-anchor="middle">GitHub Actions</text>
+
+  <rect x="274" y="373" width="90" height="34" rx="17" fill="#1c2128" stroke="#30363d" stroke-width="1"/>
+  <text x="319" y="395" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#8b949e" text-anchor="middle">Argo CD</text>
+
+  <rect x="378" y="373" width="120" height="34" rx="17" fill="#1c2128" stroke="#30363d" stroke-width="1"/>
+  <text x="438" y="395" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#8b949e" text-anchor="middle">Prometheus</text>
+
+  <rect x="512" y="373" width="130" height="34" rx="17" fill="#1c2128" stroke="#30363d" stroke-width="1"/>
+  <text x="577" y="395" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#8b949e" text-anchor="middle">Helm / EKS</text>
+
+  <!-- Portfolio URL -->
+  <text x="100" y="460" font-family="'Courier New', monospace" font-size="18" fill="#0ea5e9" opacity="0.8">&#x1F310; abdusirshad.github.io/portfolio</text>
+
+  <!-- Right panel — terminal card -->
+  <rect x="820" y="110" width="330" height="390" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <!-- Terminal bar -->
+  <rect x="820" y="110" width="330" height="36" rx="12" fill="#1c2128"/>
+  <rect x="820" y="134" width="330" height="12" fill="#1c2128"/>
+  <circle cx="848" cy="128" r="6" fill="#ff5f56"/>
+  <circle cx="870" cy="128" r="6" fill="#ffbd2e"/>
+  <circle cx="892" cy="128" r="6" fill="#27c93f"/>
+
+  <!-- Terminal text -->
+  <text x="844" y="178" font-family="'Courier New', monospace" font-size="13" fill="#27c93f">$ kubectl get nodes</text>
+  <text x="844" y="200" font-family="'Courier New', monospace" font-size="13" fill="#8b949e">NAME        STATUS   ROLES</text>
+  <text x="844" y="220" font-family="'Courier New', monospace" font-size="13" fill="#f0f6fc">aks-sys-1   Ready    system</text>
+  <text x="844" y="240" font-family="'Courier New', monospace" font-size="13" fill="#f0f6fc">aks-usr-1   Ready    user</text>
+  <text x="844" y="260" font-family="'Courier New', monospace" font-size="13" fill="#f0f6fc">aks-gpu-1   Ready    gpu</text>
+  <text x="844" y="288" font-family="'Courier New', monospace" font-size="13" fill="#27c93f">$ terraform plan</text>
+  <text x="844" y="308" font-family="'Courier New', monospace" font-size="13" fill="#8b949e">Plan: 42 to add,</text>
+  <text x="844" y="328" font-family="'Courier New', monospace" font-size="13" fill="#8b949e">      0 to change,</text>
+  <text x="844" y="348" font-family="'Courier New', monospace" font-size="13" fill="#8b949e">      0 to destroy.</text>
+  <text x="844" y="376" font-family="'Courier New', monospace" font-size="13" fill="#27c93f">$ mlflow run .</text>
+  <text x="844" y="396" font-family="'Courier New', monospace" font-size="13" fill="#8b949e">accuracy: 0.9724 ✓</text>
+  <text x="844" y="416" font-family="'Courier New', monospace" font-size="13" fill="#0ea5e9">model registered ▶</text>
+  <text x="844" y="444" font-family="'Courier New', monospace" font-size="13" fill="#27c93f">$ <tspan fill="#f0f6fc" opacity="0.5">_</tspan></text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="590" width="1200" height="37" fill="#161b22"/>
+  <text x="100" y="614" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#8b949e">Open to UAE &amp; UK Relocation</text>
+  <text x="600" y="614" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#30363d" text-anchor="middle">&#9632; &#9632; &#9632;</text>
+  <text x="1100" y="614" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#8b949e" text-anchor="end">github.com/abdusirshad</text>
+</svg>
