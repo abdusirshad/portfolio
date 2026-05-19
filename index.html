@@ -299,7 +299,7 @@
   <div class="hero-grid">
     <div>
       <div class="hero-tag">
-        <span></span> Open to UAE &amp; UK Opportunities
+        Open to UAE &amp; UK Opportunities
       </div>
       <h1>Md.<br><span class="accent-text">Irshad</span></h1>
       <div class="hero-subtitle">
@@ -362,7 +362,6 @@
 <!-- ── ABOUT ── -->
 <section id="about">
   <div class="section-inner">
-    <div class="section-tag">// about</div>
     <h2>About Me</h2>
     <div class="section-divider"></div>
     <p style="max-width:700px;color:var(--muted);font-size:.95rem;line-height:1.8;">
@@ -376,7 +375,6 @@
 <!-- ── TECH STACK ── -->
 <section id="skills">
   <div class="section-inner">
-    <div class="section-tag">// skills</div>
     <h2>Tech Stack</h2>
     <div class="section-divider"></div>
     <div class="skills-grid">
@@ -441,13 +439,27 @@
 <!-- ── PROJECTS ── -->
 <section id="projects">
   <div class="section-inner">
-    <div class="section-tag">// projects</div>
     <h2>Featured Projects</h2>
     <div class="section-divider"></div>
     <div class="projects-grid">
 
       <a href="https://github.com/abdusirshad/portfolio/tree/main/terraform-multicloud-hub-spoke" target="_blank" class="project-card">
-        <div class="project-icon">🏗️</div>
+        <div class="project-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- center hub -->
+            <circle cx="20" cy="20" r="5" fill="#0ea5e9" opacity="0.9"/>
+            <!-- outer nodes -->
+            <circle cx="20" cy="5"  r="3" fill="#38bdf8" opacity="0.8"/>
+            <circle cx="35" cy="28" r="3" fill="#38bdf8" opacity="0.8"/>
+            <circle cx="5"  cy="28" r="3" fill="#38bdf8" opacity="0.8"/>
+            <!-- spoke lines -->
+            <line x1="20" y1="15" x2="20" y2="8"  stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="2 2"/>
+            <line x1="24" y1="23" x2="32" y2="26" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="2 2"/>
+            <line x1="16" y1="23" x2="8"  y2="26" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="2 2"/>
+            <!-- orbit ring -->
+            <circle cx="20" cy="20" r="13" stroke="#0ea5e9" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.4"/>
+          </svg>
+        </div>
         <h3>Multi-Cloud Hub-and-Spoke IaC</h3>
         <p>Azure + AWS hub-and-spoke production infrastructure on Terraform 1.7.5. Provisioned 9 environments via 9-stage Azure DevOps pipelines, eliminating ~80% of manual Terraform invocations.</p>
         <div class="project-tags">
@@ -531,7 +543,6 @@
 <!-- ── EXPERIENCE ── -->
 <section id="experience">
   <div class="section-inner">
-    <div class="section-tag">// experience</div>
     <h2>Work Experience</h2>
     <div class="section-divider"></div>
     <div class="timeline">
@@ -615,7 +626,6 @@
 <!-- ── CERTIFICATIONS ── -->
 <section id="certifications">
   <div class="section-inner">
-    <div class="section-tag">// certifications</div>
     <h2>Certifications</h2>
     <div class="section-divider"></div>
     <div class="certs-grid">
@@ -650,7 +660,6 @@
 <!-- ── CONTACT ── -->
 <section id="contact">
   <div class="section-inner contact-inner">
-    <div class="section-tag">// contact</div>
     <h2>Get In Touch</h2>
     <div class="section-divider" style="margin:1rem auto 2rem"></div>
     <p>Open to Senior DevOps / Cloud / MLOps roles in <strong>UAE</strong> and <strong>UK</strong>. Feel free to reach out.</p>
