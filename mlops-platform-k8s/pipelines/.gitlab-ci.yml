@@ -1,0 +1,87 @@
+stages:
+  - validate
+  - build
+  - train-validate
+  - deploy-staging
+  - integration-test
+  - deploy-prod
+
+variables:
+  IMAGE_TAG: $CI_COMMIT_SHORT_SHA
+  MLFLOW_TRACKING_URI: "http://mlflow.mlops.svc.cluster.local:5000"
+  MODEL_NAME: "production-model"
+  ACCURACY_THRESHOLD: "0.87"
+
+.docker-login: &docker-login
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+lint-and-test:
+  stage: validate
+  image: python:3.11-slim
+  script:
+    - pip install ruff pytest -r requirements.txt
+    - ruff check src/
+    - pytest tests/unit/ -v --junitxml=report.xml
+  artifacts:
+    reports:
+      junit: report.xml
+
+docker-build:
+  stage: build
+  image: docker:24
+  services:
+    - docker:24-dind
+  <<: *docker-login
+  script:
+    - docker build -f Dockerfile.train -t $CI_REGISTRY_IMAGE/train:$IMAGE_TAG .
+    - docker build -f Dockerfile.serve -t $CI_REGISTRY_IMAGE/serve:$IMAGE_TAG .
+    - trivy image --exit-code 1 --severity CRITICAL $CI_REGISTRY_IMAGE/serve:$IMAGE_TAG
+    - docker push $CI_REGISTRY_IMAGE/train:$IMAGE_TAG
+    - docker push $CI_REGISTRY_IMAGE/serve:$IMAGE_TAG
+
+model-validation:
+  stage: train-validate
+  image: $CI_REGISTRY_IMAGE/train:$IMAGE_TAG
+  script:
+    - python pipelines/model-validation.py
+  artifacts:
+    paths:
+      - validation_report.json
+
+deploy-staging:
+  stage: deploy-staging
+  image: alpine/helm:3.14.0
+  environment:
+    name: staging
+  script:
+    - helm upgrade --install model-serving-staging helm-charts/model-serving
+        --namespace mlops-staging --create-namespace
+        --set image.tag=$IMAGE_TAG
+        --set mlflow.runId=$MLFLOW_RUN_ID
+        --wait --timeout 5m --atomic
+
+integration-tests:
+  stage: integration-test
+  image: python:3.11-slim
+  script:
+    - pip install pytest httpx
+    - pytest tests/integration/ -v --base-url=https://$STAGING_HOST
+  only:
+    - main
+
+deploy-prod:
+  stage: deploy-prod
+  image: alpine/helm:3.14.0
+  environment:
+    name: production
+  when: manual
+  only:
+    - main
+  script:
+    - helm upgrade --install model-serving-prod helm-charts/model-serving
+        --namespace mlops-prod
+        --set image.tag=$IMAGE_TAG
+        --set replicaCount=3
+        --set resources.requests.memory=4Gi
+        --wait --timeout 10m --atomic

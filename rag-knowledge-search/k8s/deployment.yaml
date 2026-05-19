@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-knowledge-search
+  namespace: ai-platform
+  labels:
+    app: rag-knowledge-search
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rag-knowledge-search
+  template:
+    metadata:
+      labels:
+        app: rag-knowledge-search
+    spec:
+      containers:
+        - name: rag-api
+          image: your-registry/rag-knowledge-search:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rag-secrets
+                  key: openai-api-key
+            - name: PINECONE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rag-secrets
+                  key: pinecone-api-key
+            - name: PINECONE_INDEX
+              valueFrom:
+                configMapKeyRef:
+                  name: rag-config
+                  key: pinecone-index
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 2
+              memory: 4Gi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-knowledge-search
+  namespace: ai-platform
+spec:
+  selector:
+    app: rag-knowledge-search
+  ports:
+    - port: 80
+      targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rag-knowledge-search
+  namespace: ai-platform
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: rag-knowledge-search
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70

@@ -1,0 +1,56 @@
+groups:
+  - name: slo-burn-rate
+    rules:
+      - alert: ErrorBudgetBurnHigh
+        expr: |
+          (
+            rate(http_requests_total{status=~"5.."}[1h])
+            / rate(http_requests_total[1h])
+          ) > (14.4 * (1 - 0.999))
+          and
+          (
+            rate(http_requests_total{status=~"5.."}[5m])
+            / rate(http_requests_total[5m])
+          ) > (14.4 * (1 - 0.999))
+        for: 2m
+        labels:
+          severity: critical
+          team: platform
+        annotations:
+          summary: "High error budget burn (14.4x) — 2h to exhaust"
+          runbook_url: "https://wiki.company.com/runbooks/error-budget-burn"
+
+      - alert: ErrorBudgetBurnMedium
+        expr: |
+          (
+            rate(http_requests_total{status=~"5.."}[6h])
+            / rate(http_requests_total[6h])
+          ) > (6 * (1 - 0.999))
+          and
+          (
+            rate(http_requests_total{status=~"5.."}[30m])
+            / rate(http_requests_total[30m])
+          ) > (6 * (1 - 0.999))
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Medium error budget burn (6x) — 1d to exhaust"
+
+      - alert: LatencySLOBreach
+        expr: |
+          histogram_quantile(0.99,
+            rate(http_request_duration_seconds_bucket[5m])
+          ) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "P99 latency SLO breach — {{ $value | humanizeDuration }}"
+
+      - alert: AvailabilitySLOBreach
+        expr: avg_over_time(up[30m]) < 0.999
+        labels:
+          severity: critical
+        annotations:
+          summary: "Availability below 99.9% SLO"

@@ -1,0 +1,109 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+                apiVersion: v1
+                kind: Pod
+                spec:
+                  containers:
+                  - name: docker
+                    image: docker:24-dind
+                    securityContext:
+                      privileged: true
+                  - name: helm
+                    image: alpine/helm:3.14.0
+                    command: [sleep, infinity]
+                  - name: trivy
+                    image: aquasec/trivy:latest
+                    command: [sleep, infinity]
+            '''
+        }
+    }
+
+    environment {
+        IMAGE_TAG  = "${env.GIT_COMMIT[0..7]}"
+        REGISTRY   = credentials('registry-url')
+        KUBECONFIG = credentials('kubeconfig-prod')
+    }
+
+    stages {
+        stage('Parallel: Lint + Test') {
+            parallel {
+                stage('Lint') {
+                    steps {
+                        sh 'hadolint Dockerfile'
+                        sh 'yamllint helm/'
+                    }
+                }
+                stage('Unit Tests') {
+                    steps {
+                        sh 'pytest tests/unit/ -v --junitxml=test-results.xml'
+                    }
+                    post {
+                        always { junit 'test-results.xml' }
+                    }
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                container('docker') {
+                    sh """
+                        docker build --cache-from ${REGISTRY}/app:latest \
+                          -t ${REGISTRY}/app:${IMAGE_TAG} .
+                        docker push ${REGISTRY}/app:${IMAGE_TAG}
+                    """
+                }
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                container('trivy') {
+                    sh "trivy image --exit-code 1 --severity CRITICAL ${REGISTRY}/app:${IMAGE_TAG}"
+                }
+            }
+        }
+
+        stage('Deploy Staging') {
+            steps {
+                container('helm') {
+                    sh """
+                        helm upgrade --install app-staging helm/app \
+                          --namespace staging \
+                          --set image.tag=${IMAGE_TAG} \
+                          --wait --timeout 5m --atomic
+                    """
+                }
+            }
+        }
+
+        stage('Deploy Prod') {
+            when { branch 'main' }
+            input { message 'Deploy to production?'; ok 'Deploy' }
+            steps {
+                container('helm') {
+                    sh """
+                        helm upgrade --install app-prod helm/app \
+                          --namespace production \
+                          --set image.tag=${IMAGE_TAG} \
+                          --set replicaCount=3 \
+                          --wait --timeout 10m --atomic
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            slackSend channel: '#alerts-deployments', color: 'danger',
+                      message: "Deploy FAILED: ${env.JOB_NAME} ${IMAGE_TAG}"
+        }
+        success {
+            slackSend channel: '#deployments', color: 'good',
+                      message: "Deploy SUCCESS: ${env.JOB_NAME} ${IMAGE_TAG}"
+        }
+    }
+}

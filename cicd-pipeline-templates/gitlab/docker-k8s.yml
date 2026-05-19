@@ -1,0 +1,90 @@
+stages:
+  - validate
+  - build
+  - security-scan
+  - deploy-staging
+  - integration-test
+  - deploy-prod
+
+variables:
+  IMAGE_TAG: $CI_COMMIT_SHORT_SHA
+  HELM_TIMEOUT: 5m
+
+.docker-login: &docker-login
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+lint:
+  stage: validate
+  image: hadolint/hadolint:latest-debian
+  script:
+    - hadolint Dockerfile
+
+yaml-lint:
+  stage: validate
+  image: cytopia/yamllint:latest
+  script:
+    - yamllint helm/
+
+docker-build:
+  stage: build
+  image: docker:24
+  services:
+    - docker:24-dind
+  <<: *docker-login
+  script:
+    - docker build
+        --cache-from $CI_REGISTRY_IMAGE:latest
+        -t $CI_REGISTRY_IMAGE:$IMAGE_TAG
+        -t $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$IMAGE_TAG
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+trivy-scan:
+  stage: security-scan
+  image: aquasec/trivy:latest
+  script:
+    - trivy image --exit-code 1 --severity CRITICAL --no-progress $CI_REGISTRY_IMAGE:$IMAGE_TAG
+    - trivy image --format sarif --output trivy-results.sarif $CI_REGISTRY_IMAGE:$IMAGE_TAG
+  artifacts:
+    reports:
+      sast: trivy-results.sarif
+    when: always
+
+deploy-staging:
+  stage: deploy-staging
+  image: alpine/helm:3.14.0
+  environment:
+    name: staging
+  script:
+    - helm upgrade --install $CI_PROJECT_NAME-staging helm/$CI_PROJECT_NAME
+        --namespace $K8S_NAMESPACE_STAGING
+        --set image.repository=$CI_REGISTRY_IMAGE
+        --set image.tag=$IMAGE_TAG
+        --set ingress.host=$STAGING_HOST
+        --wait --timeout $HELM_TIMEOUT --atomic
+
+integration-tests:
+  stage: integration-test
+  image: python:3.11-slim
+  script:
+    - pip install pytest httpx
+    - pytest tests/integration/ -v --base-url=https://$STAGING_HOST
+  only:
+    - main
+
+deploy-prod:
+  stage: deploy-prod
+  image: alpine/helm:3.14.0
+  environment:
+    name: production
+  when: manual
+  only:
+    - main
+  script:
+    - helm upgrade --install $CI_PROJECT_NAME-prod helm/$CI_PROJECT_NAME
+        --namespace $K8S_NAMESPACE_PROD
+        --set image.repository=$CI_REGISTRY_IMAGE
+        --set image.tag=$IMAGE_TAG
+        --set replicaCount=3
+        --wait --timeout $HELM_TIMEOUT --atomic
