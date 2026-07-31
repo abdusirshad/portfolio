@@ -453,7 +453,7 @@
     <div class="section-divider"></div>
     <div class="projects-grid">
 
-      <a href="https://github.com/abdusirshad/portfolio/tree/main/terraform-multicloud-hub-spoke" target="_blank" class="project-card">
+      <a href="https://github.com/abdusirshad/terraform-multicloud-hub-spoke" target="_blank" class="project-card">
         <div class="project-icon">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- center hub -->
@@ -471,7 +471,7 @@
           </svg>
         </div>
         <h3>Multi-Cloud Hub-and-Spoke IaC</h3>
-        <p>Azure + AWS hub-and-spoke production infrastructure on Terraform 1.7.5. Provisioned 9 environments via 9-stage Azure DevOps pipelines, eliminating ~80% of manual Terraform invocations.</p>
+        <p>A reusable Terraform module library for multi-cloud (Azure + AWS) hub-and-spoke networking with AKS — validate-clean modules, an example root, and fmt/validate/tflint CI.</p>
         <div class="project-tags">
           <span class="project-tag">Terraform</span>
           <span class="project-tag">Azure</span>
@@ -482,67 +482,95 @@
         <span class="project-link">View on GitHub</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/portfolio/tree/main/rag-knowledge-search" target="_blank" class="project-card">
-        <div class="project-icon">🔍</div>
-        <h3>RAG Knowledge Search System</h3>
-        <p>Production Retrieval-Augmented Generation (RAG) system serving 200+ engineers. LangChain + GPT-4o + Pinecone/FAISS hybrid retriever with natural-language search over 50,000+ doc chunks.</p>
+      <a href="https://github.com/abdusirshad/gitops-cicd-platform" target="_blank" class="project-card">
+        <div class="project-icon">🔁</div>
+        <h3>Production GitOps CI/CD Platform</h3>
+        <p>GitHub Actions → GHCR → Argo CD App-of-Apps → Kustomize overlays with Argo Rollouts canary + analysis, kube-prometheus-stack, and k6 load tests. Runs end-to-end on kind.</p>
         <div class="project-tags">
-          <span class="project-tag">LangChain</span>
-          <span class="project-tag">OpenAI</span>
-          <span class="project-tag">Pinecone</span>
-          <span class="project-tag">FAISS</span>
-          <span class="project-tag">Python</span>
+          <span class="project-tag">Argo CD</span>
+          <span class="project-tag">Argo Rollouts</span>
+          <span class="project-tag">Kustomize</span>
+          <span class="project-tag">Kubernetes</span>
+          <span class="project-tag">GitHub Actions</span>
         </div>
         <span class="project-link">View on GitHub</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/portfolio/tree/main/mlops-platform-k8s" target="_blank" class="project-card">
+      <a href="https://github.com/abdusirshad/devsecops-pipeline" target="_blank" class="project-card">
+        <div class="project-icon">🔒</div>
+        <h3>DevSecOps Pipeline</h3>
+        <p>A 9-stage security pipeline — Gitleaks, Semgrep, Hadolint, Trivy, Checkov, OPA/Conftest, Syft SBOM, and keyless cosign signing — scanning a real sample app. Green on a public fork.</p>
+        <div class="project-tags">
+          <span class="project-tag">DevSecOps</span>
+          <span class="project-tag">GitHub Actions</span>
+          <span class="project-tag">Trivy</span>
+          <span class="project-tag">OPA</span>
+          <span class="project-tag">Cosign</span>
+        </div>
+        <span class="project-link">View on GitHub</span>
+      </a>
+
+      <a href="https://github.com/abdusirshad/mlops-platform-k8s" target="_blank" class="project-card">
         <div class="project-icon">🤖</div>
         <h3>MLOps Platform on Kubernetes</h3>
-        <p>MLflow-based MLOps platform on EKS/AKS — automated model packaging, versioning, and promotion with GitLab CI/CD gates. Reduced model release lead time by 50%.</p>
+        <p>End-to-end MLOps: train → MLflow registry with an accuracy gate → FastAPI serving on Kubernetes, plus Prometheus/Grafana model-serving observability. Runs via Docker Compose or kind.</p>
         <div class="project-tags">
           <span class="project-tag">MLflow</span>
           <span class="project-tag">Kubernetes</span>
-          <span class="project-tag">Docker</span>
-          <span class="project-tag">Helm</span>
-          <span class="project-tag">GitLab CI</span>
+          <span class="project-tag">FastAPI</span>
+          <span class="project-tag">Prometheus</span>
+          <span class="project-tag">MLOps</span>
         </div>
         <span class="project-link">View on GitHub</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/portfolio/tree/main/cicd-pipeline-templates" target="_blank" class="project-card">
-        <div class="project-icon">🚀</div>
-        <h3>CI/CD Pipeline Templates</h3>
-        <p>Reusable production CI/CD templates for GitLab CI, GitHub Actions, Jenkins, and Argo CD. Includes Trivy scanning, OPA policy gates, OIDC auth, and Helm deployments.</p>
-        <div class="project-tags">
-          <span class="project-tag">GitLab CI</span>
-          <span class="project-tag">GitHub Actions</span>
-          <span class="project-tag">Jenkins</span>
-          <span class="project-tag">Argo CD</span>
-          <span class="project-tag">Trivy</span>
-        </div>
-        <span class="project-link">View on GitHub</span>
-      </a>
-
-      <a href="https://github.com/abdusirshad/portfolio/tree/main/observability-stack" target="_blank" class="project-card">
+      <a href="https://github.com/abdusirshad/observability-stack" target="_blank" class="project-card">
         <div class="project-icon">📊</div>
         <h3>Observability Stack</h3>
-        <p>Prometheus + Grafana + ELK on Kubernetes with SLO/SLI burn-rate alerts, PagerDuty routing, and FinOps cost dashboards. Sustained 99.99% availability across 750+ servers.</p>
+        <p>One-command Prometheus + Grafana + Alertmanager stack with multi-window burn-rate SLO alerts and auto-provisioned RED/SLO dashboards over an instrumented sample app.</p>
         <div class="project-tags">
           <span class="project-tag">Prometheus</span>
           <span class="project-tag">Grafana</span>
-          <span class="project-tag">ELK</span>
-          <span class="project-tag">PagerDuty</span>
+          <span class="project-tag">Alertmanager</span>
+          <span class="project-tag">SLO</span>
           <span class="project-tag">SRE</span>
         </div>
         <span class="project-link">View on GitHub</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/portfolio" target="_blank" class="project-card" style="border-style:dashed;justify-content:center;align-items:center;text-align:center;min-height:200px;">
+      <a href="https://github.com/abdusirshad/rag-knowledge-search" target="_blank" class="project-card">
+        <div class="project-icon">🔍</div>
+        <h3>RAG Knowledge Search</h3>
+        <p>Reference Retrieval-Augmented Generation platform: FastAPI + hybrid retrieval (FAISS dense + BM25 sparse) + reranking with citations. Runs offline with an extractive fallback; OpenAI/Pinecone optional.</p>
+        <div class="project-tags">
+          <span class="project-tag">RAG</span>
+          <span class="project-tag">LangChain</span>
+          <span class="project-tag">FAISS</span>
+          <span class="project-tag">FastAPI</span>
+          <span class="project-tag">Python</span>
+        </div>
+        <span class="project-link">View on GitHub</span>
+      </a>
+
+      <a href="https://github.com/abdusirshad/cicd-pipeline-templates" target="_blank" class="project-card">
+        <div class="project-icon">🚀</div>
+        <h3>Reusable CI/CD Templates</h3>
+        <p>A reusable CI/CD template library — GitHub Actions reusable workflows + GitLab CI templates + a Jenkins shared library — demonstrated end-to-end on a bundled sample app with security gates.</p>
+        <div class="project-tags">
+          <span class="project-tag">GitHub Actions</span>
+          <span class="project-tag">GitLab CI</span>
+          <span class="project-tag">Jenkins</span>
+          <span class="project-tag">Reusable Workflows</span>
+          <span class="project-tag">Trivy</span>
+        </div>
+        <span class="project-link">View on GitHub</span>
+      </a>
+
+      <a href="https://github.com/abdusirshad?tab=repositories" target="_blank" class="project-card" style="border-style:dashed;justify-content:center;align-items:center;text-align:center;min-height:200px;">
         <div style="color:var(--muted)">
           <div style="font-size:2rem;margin-bottom:.75rem">+</div>
-          <div style="font-weight:600;margin-bottom:.5rem">More Projects</div>
-          <div style="font-size:.82rem">View full portfolio on GitHub</div>
+          <div style="font-weight:600;margin-bottom:.5rem">More on GitHub</div>
+          <div style="font-size:.82rem">View all repositories</div>
         </div>
       </a>
 
