@@ -202,6 +202,52 @@
     .project-link::after { content: '→'; transition: transform .2s; }
     .project-card:hover .project-link::after { transform: translateX(4px); }
 
+    /* ── FEATURED PROJECTS ── */
+    .projects-featured { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .project-card.featured {
+      border-color: rgba(167,139,250,.4);
+      background: linear-gradient(135deg, rgba(167,139,250,.07) 0%, rgba(14,165,233,.05) 100%);
+      position: relative; overflow: hidden;
+    }
+    .project-card.featured:hover { border-color: var(--purple); }
+    .featured-badge {
+      position: absolute; top: 1rem; right: 1rem;
+      padding: .2rem .6rem; border-radius: 99px; font-size: .68rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--purple), var(--accent));
+      color: #fff; letter-spacing: .04em;
+    }
+    .project-card.featured h3 { font-size: 1.1rem; }
+    .project-card.featured .project-tag {
+      background: rgba(167,139,250,.15); color: var(--purple); border-color: rgba(167,139,250,.3);
+    }
+    .projects-sub-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem; color: var(--muted); font-weight: 500;
+      margin: 2rem 0 1rem; display: flex; align-items: center; gap: .75rem;
+    }
+    .projects-sub-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ── FREELANCE SECTION ── */
+    #freelance { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .freelance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+    .freelance-card {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.25rem; transition: border-color .2s;
+    }
+    .freelance-card:hover { border-color: var(--accent); }
+    .freelance-card h4 { font-size: .9rem; font-weight: 700; margin-bottom: .4rem; color: var(--text); }
+    .freelance-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+    .freelance-icon { font-size: 1.5rem; margin-bottom: .75rem; }
+    .avail-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .3rem .9rem; border-radius: 99px; font-size: .78rem; font-weight: 600;
+      background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3); color: var(--green);
+      margin-bottom: 1.5rem;
+    }
+    .avail-badge span { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+
+    @media (max-width: 768px) { .projects-featured { grid-template-columns: 1fr; } }
+
     /* ── EXPERIENCE ── */
     #experience { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .timeline { display: flex; flex-direction: column; gap: 0; }
@@ -294,6 +340,7 @@
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#freelance">Freelance</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="MD_Irshad_Resume.pdf" download="MD_Irshad_Resume.pdf" class="nav-resume">↓ Resume</a>
@@ -309,19 +356,19 @@
   <div class="hero-grid">
     <div>
       <div class="hero-tag">
-        Open to UAE &amp; UK Opportunities
+        <span></span> Open to UAE · UK Roles &amp; Freelance Projects
       </div>
       <h1>Md.<br><span class="accent-text">Irshad</span></h1>
       <div class="hero-subtitle">
         <span id="typed"></span><span class="cursor"></span>
       </div>
       <p class="hero-desc">
-        Senior Cloud, DevOps &amp; AI Platform Engineer with <strong>7+ years</strong> building production platforms on AWS &amp; Azure for regulated banking, fintech, and enterprise SaaS. CKA · AZ-104 · AZ-900 certified.
+        Senior Cloud, DevOps &amp; AI Platform Engineer with <strong>7+ years</strong> building production platforms on AWS &amp; Azure for regulated banking, fintech, and enterprise SaaS. Built <strong>TRecos</strong> and <strong>NUMO SDLC</strong> — AI platforms shipped to enterprise banking production. CKA · AZ-104 · AZ-900 certified.
       </p>
       <div class="hero-btns">
         <a href="#projects" class="btn-primary">View Projects</a>
-        <a href="#contact" class="btn-outline">Get In Touch</a>
-        <a href="https://github.com/abdusirshad/portfolio" target="_blank" class="btn-outline">↓ GitHub</a>
+        <a href="#contact" class="btn-outline">Hire Me</a>
+        <a href="https://github.com/abdusirshad" target="_blank" class="btn-outline">↓ GitHub</a>
       </div>
       <div class="hero-stats">
         <div class="stat">
@@ -377,7 +424,9 @@
     <p style="max-width:700px;color:var(--muted);font-size:.95rem;line-height:1.8;">
       I'm a Senior Cloud, DevOps &amp; AI Platform Engineer based in Delhi, India, with <strong style="color:var(--text)">7+ years</strong> of hands-on experience architecting and operating production platforms on <strong style="color:var(--text)">AWS and Microsoft Azure</strong>. I specialize in Kubernetes, Terraform IaC, MLOps, and DevSecOps for regulated banking and fintech environments.
       <br><br>
-      Most recently, I served as <strong style="color:var(--text)">platform technical lead</strong> for the <strong style="color:var(--accent)">NUMO AI-for-SDLC</strong> programme at <strong style="color:var(--text)">First Abu Dhabi Bank (FAB, UAE)</strong> — delivering AKS-based MLOps pipelines with banking-grade security and compliance controls.
+      I built two enterprise AI platforms shipped to production: <strong style="color:var(--purple)">TRecos</strong> — a real-time recommendation engine on AKS with GPU node pools, Azure OpenAI, pgvector RAG, and Argo Workflows — and <strong style="color:var(--accent)">NUMO SDLC</strong> — an AI delivery automation platform at <strong style="color:var(--text)">First Abu Dhabi Bank (FAB, UAE)</strong> that automates BRD authoring, Jira story generation, and BDD test creation.
+      <br><br>
+      I'm available for <strong style="color:var(--green)">freelance engagements</strong> — cloud architecture, Kubernetes migrations, AI/RAG platforms, DevSecOps pipelines, and MLOps builds.
     </p>
   </div>
 </section>
@@ -449,8 +498,49 @@
 <!-- ── PROJECTS ── -->
 <section id="projects">
   <div class="section-inner">
-    <h2>Featured Projects</h2>
+    <h2>Projects</h2>
     <div class="section-divider"></div>
+
+    <!-- Featured: Enterprise AI Platforms -->
+    <div class="projects-sub-label">Enterprise AI Platforms — Production Deployments</div>
+    <div class="projects-featured">
+
+      <a href="https://github.com/abdusirshad/halo-platform-showcase" target="_blank" class="project-card featured">
+        <span class="featured-badge">FEATURED</span>
+        <div class="project-icon">⚡</div>
+        <h3>TRecos — Real-Time Recommendation Engine</h3>
+        <p>Production AKS platform delivering real-time AI recommendations. GPU node pools for model inference, Argo Workflows for training orchestration, Azure OpenAI + pgvector RAG pipeline, and full DevSecOps CI/CD — deployed for enterprise banking with banking-grade security and compliance.</p>
+        <div class="project-tags">
+          <span class="project-tag">Azure OpenAI</span>
+          <span class="project-tag">AKS + GPU</span>
+          <span class="project-tag">pgvector · RAG</span>
+          <span class="project-tag">Argo Workflows</span>
+          <span class="project-tag">FastAPI</span>
+          <span class="project-tag">Helm</span>
+        </div>
+        <span class="project-link">View on GitHub</span>
+      </a>
+
+      <a href="https://github.com/abdusirshad/numo-sdlc-platform-showcase" target="_blank" class="project-card featured">
+        <span class="featured-badge">FEATURED</span>
+        <div class="project-icon">🧠</div>
+        <h3>NUMO — AI-Powered SDLC Automation</h3>
+        <p>AI delivery platform at First Abu Dhabi Bank (FAB, UAE) automating BRD authoring, Jira story generation, Confluence documentation, and BDD test creation via RAG pipelines. Azure AD RBAC across 6 product modules, SSE streaming, Jira &amp; Confluence OAuth 2.0, Langfuse LLM tracing.</p>
+        <div class="project-tags">
+          <span class="project-tag">Azure OpenAI gpt-4o</span>
+          <span class="project-tag">RAG · pgvector</span>
+          <span class="project-tag">FastAPI · AKS</span>
+          <span class="project-tag">Jira · Confluence</span>
+          <span class="project-tag">Azure AD RBAC</span>
+          <span class="project-tag">React 18</span>
+        </div>
+        <span class="project-link">View on GitHub</span>
+      </a>
+
+    </div>
+
+    <!-- Open Source Portfolio -->
+    <div class="projects-sub-label">Open Source Portfolio</div>
     <div class="projects-grid">
 
       <a href="https://github.com/abdusirshad/terraform-multicloud-hub-spoke" target="_blank" class="project-card">
@@ -574,6 +664,51 @@
         </div>
       </a>
 
+    </div><!-- /.projects-grid -->
+  </div>
+</section>
+
+<!-- ── FREELANCE ── -->
+<section id="freelance">
+  <div class="section-inner">
+    <div class="section-tag">// available for hire</div>
+    <h2>Freelance &amp; Consulting</h2>
+    <div class="section-divider"></div>
+    <div class="avail-badge"><span></span> Available for new projects</div>
+    <p style="max-width:620px;color:var(--muted);font-size:.95rem;line-height:1.8;margin-bottom:0;">
+      I take on freelance engagements for startups and enterprises needing senior-level Cloud &amp; AI platform expertise — remotely from India, aligned to UAE / UK / US timezones.
+    </p>
+    <div class="freelance-grid">
+      <div class="freelance-card">
+        <div class="freelance-icon">☸️</div>
+        <h4>Kubernetes &amp; AKS/EKS Setup</h4>
+        <p>Cluster design, Helm charts, RBAC, autoscaling, namespace isolation, and GitOps-ready infrastructure from scratch.</p>
+      </div>
+      <div class="freelance-card">
+        <div class="freelance-icon">🧠</div>
+        <h4>AI / RAG Platform Build</h4>
+        <p>FastAPI + Azure OpenAI / AWS Bedrock + pgvector/FAISS RAG pipelines with SSE streaming and cost attribution via Langfuse.</p>
+      </div>
+      <div class="freelance-card">
+        <div class="freelance-icon">🏗️</div>
+        <h4>Terraform IaC &amp; Cloud Architecture</h4>
+        <p>Multi-cloud (Azure + AWS) hub-spoke networks, modular Terraform, CI-driven plan/apply, and cost-optimised infrastructure.</p>
+      </div>
+      <div class="freelance-card">
+        <div class="freelance-icon">🔐</div>
+        <h4>DevSecOps Pipeline</h4>
+        <p>Shift-left security gates: Trivy, OPA/Rego, Gitleaks, SBOM, cosign image signing, and policy-as-code across GitHub Actions / GitLab CI.</p>
+      </div>
+      <div class="freelance-card">
+        <div class="freelance-icon">📊</div>
+        <h4>Observability &amp; SRE</h4>
+        <p>Prometheus + Grafana + Alertmanager stacks with SLO/SLI recording rules, multi-window burn-rate alerts, and PagerDuty routing.</p>
+      </div>
+      <div class="freelance-card">
+        <div class="freelance-icon">🔄</div>
+        <h4>CI/CD &amp; GitOps</h4>
+        <p>Argo CD App-of-Apps, Argo Rollouts canary deployments, reusable GitHub Actions workflows, and kustomize overlay structures.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -700,7 +835,7 @@
   <div class="section-inner contact-inner">
     <h2>Get In Touch</h2>
     <div class="section-divider" style="margin:1rem auto 2rem"></div>
-    <p>Open to Senior DevOps / Cloud / MLOps roles in <strong>UAE</strong> and <strong>UK</strong>. Feel free to reach out.</p>
+    <p>Open to Senior DevOps / Cloud / MLOps roles in <strong>UAE</strong> and <strong>UK</strong>, and available for <strong style="color:var(--green)">freelance projects</strong> globally. Feel free to reach out.</p>
     <div class="contact-links">
       <a href="tel:+919097421696" class="contact-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6.08 6.08l1.09-1.09a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
