@@ -112,11 +112,11 @@
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
     .btn-primary {
       padding: .7rem 1.5rem; border-radius: 8px;
-      background: var(--accent); color: #fff; font-weight: 600; font-size: .9rem;
-      text-decoration: none; transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 0 20px rgba(14,165,233,.3);
+      background: transparent; color: var(--accent); font-weight: 600; font-size: .9rem;
+      text-decoration: none; transition: background .2s, color .2s, transform .2s;
+      border: 1px solid rgba(14,165,233,.5);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(14,165,233,.5); }
+    .btn-primary:hover { background: rgba(14,165,233,.1); transform: translateY(-2px); }
     .btn-outline {
       padding: .7rem 1.5rem; border-radius: 8px;
       border: 1px solid var(--border); color: var(--text); font-weight: 600; font-size: .9rem;
