@@ -187,7 +187,8 @@
       text-decoration: none; color: inherit;
     }
     .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-    .project-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .project-icon { margin-bottom: 1rem; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    .project-icon svg { width: 32px; height: 32px; border-radius: 6px; flex-shrink: 0; }
     .project-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
     .project-card p { font-size: .85rem; color: var(--muted); flex: 1; margin-bottom: 1rem; line-height: 1.6; }
     .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
@@ -507,7 +508,12 @@
 
       <a href="https://github.com/abdusirshad/halo-platform-showcase" target="_blank" class="project-card featured">
         <span class="featured-badge">FEATURED</span>
-        <div class="project-icon">⚡</div>
+        <div class="project-icon">
+          <svg viewBox="0 0 32 32" fill="none" title="Kubernetes"><rect width="32" height="32" rx="6" fill="#326CE5"/><path d="M16 6l1.6 4.9h5.1l-4.1 3 1.6 4.9L16 15.7l-4.2 3.1 1.6-4.9-4.1-3h5.1z" fill="#fff"/><circle cx="16" cy="22" r="2.5" fill="#fff" opacity=".7"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Azure OpenAI"><rect width="32" height="32" rx="6" fill="#0078D4"/><path d="M10 22l6-14 6 14" stroke="#50E6FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.5 17h7" stroke="#50E6FF" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="PostgreSQL/pgvector"><rect width="32" height="32" rx="6" fill="#336791"/><ellipse cx="16" cy="11" rx="6" ry="3" stroke="#fff" stroke-width="1.5"/><path d="M10 11v10c0 1.7 2.7 3 6 3s6-1.3 6-3V11" stroke="#fff" stroke-width="1.5"/><path d="M10 16c0 1.7 2.7 3 6 3s6-1.3 6-3" stroke="#fff" stroke-width="1.2" opacity=".6"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="GPU/AI"><rect width="32" height="32" rx="6" fill="#7C3AED"/><rect x="9" y="9" width="14" height="14" rx="2" stroke="#e9d5ff" stroke-width="1.5"/><rect x="12" y="12" width="8" height="8" rx="1" fill="#a78bfa"/><line x1="5" y1="13" x2="9" y2="13" stroke="#e9d5ff" stroke-width="1.5"/><line x1="5" y1="19" x2="9" y2="19" stroke="#e9d5ff" stroke-width="1.5"/><line x1="23" y1="13" x2="27" y2="13" stroke="#e9d5ff" stroke-width="1.5"/><line x1="23" y1="19" x2="27" y2="19" stroke="#e9d5ff" stroke-width="1.5"/></svg>
+        </div>
         <h3>TRecos - Real-Time Recommendation Engine</h3>
         <p>Production AKS platform delivering real-time AI recommendations. GPU node pools for model inference, Argo Workflows for training orchestration, Azure OpenAI + pgvector RAG pipeline, and full DevSecOps CI/CD - deployed for enterprise banking with banking-grade security and compliance.</p>
         <div class="project-tags">
@@ -523,7 +529,12 @@
 
       <a href="https://github.com/abdusirshad/numo-sdlc-platform-showcase" target="_blank" class="project-card featured">
         <span class="featured-badge">FEATURED</span>
-        <div class="project-icon">🧠</div>
+        <div class="project-icon">
+          <svg viewBox="0 0 32 32" fill="none" title="Azure OpenAI"><rect width="32" height="32" rx="6" fill="#0078D4"/><path d="M10 22l6-14 6 14" stroke="#50E6FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.5 17h7" stroke="#50E6FF" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Jira"><rect width="32" height="32" rx="6" fill="#0052CC"/><path d="M16 7l-7 9 7 9 7-9z" fill="#2684FF"/><path d="M16 7l-7 9h14z" fill="#fff" opacity=".3"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="FastAPI"><rect width="32" height="32" rx="6" fill="#009688"/><circle cx="16" cy="16" r="7" stroke="#fff" stroke-width="1.5"/><path d="M13 12l7 4-7 4V12z" fill="#fff"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="React"><rect width="32" height="32" rx="6" fill="#20232A"/><ellipse cx="16" cy="16" rx="4" ry="9" stroke="#61DAFB" stroke-width="1.3" transform="rotate(0 16 16)"/><ellipse cx="16" cy="16" rx="4" ry="9" stroke="#61DAFB" stroke-width="1.3" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="4" ry="9" stroke="#61DAFB" stroke-width="1.3" transform="rotate(120 16 16)"/><circle cx="16" cy="16" r="2" fill="#61DAFB"/></svg>
+        </div>
         <h3>NUMO - AI-Powered SDLC Automation</h3>
         <p>AI delivery platform at First Abu Dhabi Bank (FAB, UAE) automating BRD authoring, Jira story generation, Confluence documentation, and BDD test creation via RAG pipelines. Azure AD RBAC across 6 product modules, SSE streaming, Jira &amp; Confluence OAuth 2.0, Langfuse LLM tracing.</p>
         <div class="project-tags">
@@ -545,20 +556,10 @@
 
       <a href="https://github.com/abdusirshad/terraform-multicloud-hub-spoke" target="_blank" class="project-card">
         <div class="project-icon">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- center hub -->
-            <circle cx="20" cy="20" r="5" fill="#0ea5e9" opacity="0.9"/>
-            <!-- outer nodes -->
-            <circle cx="20" cy="5"  r="3" fill="#38bdf8" opacity="0.8"/>
-            <circle cx="35" cy="28" r="3" fill="#38bdf8" opacity="0.8"/>
-            <circle cx="5"  cy="28" r="3" fill="#38bdf8" opacity="0.8"/>
-            <!-- spoke lines -->
-            <line x1="20" y1="15" x2="20" y2="8"  stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="2 2"/>
-            <line x1="24" y1="23" x2="32" y2="26" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="2 2"/>
-            <line x1="16" y1="23" x2="8"  y2="26" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="2 2"/>
-            <!-- orbit ring -->
-            <circle cx="20" cy="20" r="13" stroke="#0ea5e9" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.4"/>
-          </svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Terraform"><rect width="32" height="32" rx="6" fill="#7B42BC"/><path d="M13 10v8l6-3V7z" fill="#fff"/><path d="M20.5 13.5v8l6-3V10.5z" fill="#fff" opacity=".6"/><path d="M6 13.5v8l6-3V10.5z" fill="#fff" opacity=".6"/><path d="M13 21v3l6-3v-3z" fill="#fff" opacity=".4"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Azure VNet"><rect width="32" height="32" rx="6" fill="#0078D4"/><circle cx="16" cy="16" r="5" fill="#50E6FF" opacity=".9"/><circle cx="16" cy="7" r="2.5" fill="#50E6FF" opacity=".7"/><circle cx="25" cy="22" r="2.5" fill="#50E6FF" opacity=".7"/><circle cx="7" cy="22" r="2.5" fill="#50E6FF" opacity=".7"/><line x1="16" y1="11" x2="16" y2="9.5" stroke="#50E6FF" stroke-width="1.3" stroke-dasharray="1.5 1"/><line x1="20" y1="19" x2="23" y2="20.5" stroke="#50E6FF" stroke-width="1.3" stroke-dasharray="1.5 1"/><line x1="12" y1="19" x2="9" y2="20.5" stroke="#50E6FF" stroke-width="1.3" stroke-dasharray="1.5 1"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="AWS"><rect width="32" height="32" rx="6" fill="#232F3E"/><path d="M10 18c0 0 2 2 6 2s6-2 6-2" stroke="#FF9900" stroke-width="2" stroke-linecap="round"/><path d="M22 20l2 1-2 1" stroke="#FF9900" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20l-2 1 2 1" stroke="#FF9900" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="11" width="8" height="5" rx="1" stroke="#FF9900" stroke-width="1.3"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Kubernetes/AKS"><rect width="32" height="32" rx="6" fill="#326CE5"/><path d="M16 6l1.6 4.9h5.1l-4.1 3 1.6 4.9L16 15.7l-4.2 3.1 1.6-4.9-4.1-3h5.1z" fill="#fff"/><circle cx="16" cy="22" r="2.5" fill="#fff" opacity=".7"/></svg>
         </div>
         <h3>Multi-Cloud Hub-and-Spoke IaC</h3>
         <p>A reusable Terraform module library for multi-cloud (Azure + AWS) hub-and-spoke networking with AKS - validate-clean modules, an example root, and fmt/validate/tflint CI.</p>
@@ -573,7 +574,12 @@
       </a>
 
       <a href="https://github.com/abdusirshad/gitops-cicd-platform" target="_blank" class="project-card">
-        <div class="project-icon">🔁</div>
+        <div class="project-icon">
+          <svg viewBox="0 0 32 32" fill="none" title="GitHub Actions"><rect width="32" height="32" rx="6" fill="#24292e"/><circle cx="16" cy="16" r="4" fill="#2088FF"/><circle cx="16" cy="16" r="7" stroke="#2088FF" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Argo CD"><rect width="32" height="32" rx="6" fill="#EF7B4D"/><circle cx="16" cy="16" r="7" stroke="#fff" stroke-width="1.5"/><path d="M16 9v7l5 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Kubernetes"><rect width="32" height="32" rx="6" fill="#326CE5"/><path d="M16 6l1.6 4.9h5.1l-4.1 3 1.6 4.9L16 15.7l-4.2 3.1 1.6-4.9-4.1-3h5.1z" fill="#fff"/><circle cx="16" cy="22" r="2.5" fill="#fff" opacity=".7"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Prometheus"><rect width="32" height="32" rx="6" fill="#E6522C"/><circle cx="16" cy="16" r="7" stroke="#fff" stroke-width="1.5"/><path d="M12 20c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="13" r="1.5" fill="#fff"/></svg>
+        </div>
         <h3>Production GitOps CI/CD Platform</h3>
         <p>GitHub Actions → GHCR → Argo CD App-of-Apps → Kustomize overlays with Argo Rollouts canary + analysis, kube-prometheus-stack, and k6 load tests. Runs end-to-end on kind.</p>
         <div class="project-tags">
@@ -587,7 +593,12 @@
       </a>
 
       <a href="https://github.com/abdusirshad/devsecops-pipeline" target="_blank" class="project-card">
-        <div class="project-icon">🔒</div>
+        <div class="project-icon">
+          <svg viewBox="0 0 32 32" fill="none" title="GitHub Actions"><rect width="32" height="32" rx="6" fill="#24292e"/><circle cx="16" cy="16" r="4" fill="#2088FF"/><circle cx="16" cy="16" r="7" stroke="#2088FF" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Trivy / Security"><rect width="32" height="32" rx="6" fill="#1904DA"/><path d="M16 7l8 4v8l-8 6-8-6v-8z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 16l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="OPA"><rect width="32" height="32" rx="6" fill="#1B3A5C"/><rect x="9" y="9" width="5" height="5" rx="1" fill="#6CC24A"/><rect x="18" y="9" width="5" height="5" rx="1" fill="#6CC24A"/><rect x="9" y="18" width="5" height="5" rx="1" fill="#6CC24A"/><rect x="18" y="18" width="5" height="5" rx="1" fill="#fff" opacity=".4"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="cosign/Sigstore"><rect width="32" height="32" rx="6" fill="#2F74C0"/><path d="M16 8l6 3v6l-6 7-6-7v-6z" fill="#fff" opacity=".15" stroke="#fff" stroke-width="1.5"/><path d="M13 16l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <h3>DevSecOps Pipeline</h3>
         <p>A 9-stage security pipeline - Gitleaks, Semgrep, Hadolint, Trivy, Checkov, OPA/Conftest, Syft SBOM, and keyless cosign signing - scanning a real sample app. Green on a public fork.</p>
         <div class="project-tags">
@@ -601,7 +612,12 @@
       </a>
 
       <a href="https://github.com/abdusirshad/mlops-platform-k8s" target="_blank" class="project-card">
-        <div class="project-icon">🤖</div>
+        <div class="project-icon">
+          <svg viewBox="0 0 32 32" fill="none" title="MLflow"><rect width="32" height="32" rx="6" fill="#0194E2"/><path d="M10 22V14l6-6 6 6v8" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><rect x="13" y="18" width="6" height="4" rx="1" fill="#fff" opacity=".8"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Kubernetes"><rect width="32" height="32" rx="6" fill="#326CE5"/><path d="M16 6l1.6 4.9h5.1l-4.1 3 1.6 4.9L16 15.7l-4.2 3.1 1.6-4.9-4.1-3h5.1z" fill="#fff"/><circle cx="16" cy="22" r="2.5" fill="#fff" opacity=".7"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="FastAPI"><rect width="32" height="32" rx="6" fill="#009688"/><circle cx="16" cy="16" r="7" stroke="#fff" stroke-width="1.5"/><path d="M13 12l7 4-7 4V12z" fill="#fff"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Prometheus"><rect width="32" height="32" rx="6" fill="#E6522C"/><circle cx="16" cy="16" r="7" stroke="#fff" stroke-width="1.5"/><path d="M12 20c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="13" r="1.5" fill="#fff"/></svg>
+        </div>
         <h3>MLOps Platform on Kubernetes</h3>
         <p>End-to-end MLOps: train → MLflow registry with an accuracy gate → FastAPI serving on Kubernetes, plus Prometheus/Grafana model-serving observability. Runs via Docker Compose or kind.</p>
         <div class="project-tags">
@@ -615,7 +631,12 @@
       </a>
 
       <a href="https://github.com/abdusirshad/observability-stack" target="_blank" class="project-card">
-        <div class="project-icon">📊</div>
+        <div class="project-icon">
+          <svg viewBox="0 0 32 32" fill="none" title="Prometheus"><rect width="32" height="32" rx="6" fill="#E6522C"/><circle cx="16" cy="16" r="7" stroke="#fff" stroke-width="1.5"/><path d="M12 20c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="13" r="1.5" fill="#fff"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Grafana"><rect width="32" height="32" rx="6" fill="#F46800"/><rect x="9" y="18" width="3" height="6" rx="1" fill="#fff"/><rect x="14.5" y="13" width="3" height="11" rx="1" fill="#fff"/><rect x="20" y="8" width="3" height="16" rx="1" fill="#fff"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Alertmanager"><rect width="32" height="32" rx="6" fill="#CC0000"/><path d="M16 8l7 12H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" fill="none"/><line x1="16" y1="14" x2="16" y2="17" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="19.5" r="1" fill="#fff"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="SLO/SRE"><rect width="32" height="32" rx="6" fill="#334155"/><path d="M9 23 Q13 10 16 16 Q19 22 23 9" stroke="#34d399" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        </div>
         <h3>Observability Stack</h3>
         <p>One-command Prometheus + Grafana + Alertmanager stack with multi-window burn-rate SLO alerts and auto-provisioned RED/SLO dashboards over an instrumented sample app.</p>
         <div class="project-tags">
@@ -629,7 +650,12 @@
       </a>
 
       <a href="https://github.com/abdusirshad/rag-knowledge-search" target="_blank" class="project-card">
-        <div class="project-icon">🔍</div>
+        <div class="project-icon">
+          <svg viewBox="0 0 32 32" fill="none" title="Vector DB / FAISS"><rect width="32" height="32" rx="6" fill="#1e293b"/><ellipse cx="16" cy="11" rx="6" ry="2.5" stroke="#0ea5e9" stroke-width="1.3"/><path d="M10 11v4c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4" stroke="#0ea5e9" stroke-width="1.3"/><path d="M10 15v4c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4" stroke="#0ea5e9" stroke-width="1.3" opacity=".6"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="OpenAI"><rect width="32" height="32" rx="6" fill="#000"/><path d="M16 10a6 6 0 0 1 5.2 9 6 6 0 0 1-10.4 0A6 6 0 0 1 16 10z" stroke="#fff" stroke-width="1.3"/><circle cx="16" cy="16" r="2.5" fill="#fff"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="FastAPI"><rect width="32" height="32" rx="6" fill="#009688"/><circle cx="16" cy="16" r="7" stroke="#fff" stroke-width="1.5"/><path d="M13 12l7 4-7 4V12z" fill="#fff"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Python"><rect width="32" height="32" rx="6" fill="#3776AB"/><path d="M16 8c-3 0-5 1-5 3v2h5v1H9c-2 0-3 1.3-3 3s1 3 3 3h1v-2c0-2 1.5-3 4-3h5c2 0 3-1 3-3v-2c0-2-2-3-6-2z" fill="#FFD43B"/><path d="M16 24c3 0 5-1 5-3v-2h-5v-1h7c2 0 3-1.3 3-3s-1-3-3-3h-1v2c0 2-1.5 3-4 3h-5c-2 0-3 1-3 3v2c0 2 2 3 6 2z" fill="#fff"/></svg>
+        </div>
         <h3>RAG Knowledge Search</h3>
         <p>Reference Retrieval-Augmented Generation platform: FastAPI + hybrid retrieval (FAISS dense + BM25 sparse) + reranking with citations. Runs offline with an extractive fallback; OpenAI/Pinecone optional.</p>
         <div class="project-tags">
@@ -643,7 +669,12 @@
       </a>
 
       <a href="https://github.com/abdusirshad/cicd-pipeline-templates" target="_blank" class="project-card">
-        <div class="project-icon">🚀</div>
+        <div class="project-icon">
+          <svg viewBox="0 0 32 32" fill="none" title="GitHub Actions"><rect width="32" height="32" rx="6" fill="#24292e"/><circle cx="16" cy="16" r="4" fill="#2088FF"/><circle cx="16" cy="16" r="7" stroke="#2088FF" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="GitLab CI"><rect width="32" height="32" rx="6" fill="#FC6D26"/><path d="M16 24l-7-5 2-8 2 5h6l2-5 2 8z" fill="#fff"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Jenkins"><rect width="32" height="32" rx="6" fill="#D24939"/><circle cx="16" cy="14" r="6" stroke="#fff" stroke-width="1.5"/><path d="M13 22h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M16 20v2" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 32 32" fill="none" title="Docker"><rect width="32" height="32" rx="6" fill="#2496ED"/><rect x="8" y="14" width="16" height="8" rx="2" stroke="#fff" stroke-width="1.5"/><rect x="11" y="11" width="3" height="3" rx="0.5" fill="#fff"/><rect x="15" y="11" width="3" height="3" rx="0.5" fill="#fff"/><rect x="19" y="11" width="3" height="3" rx="0.5" fill="#fff"/><rect x="11" y="14" width="3" height="3" rx="0.5" fill="#fff" opacity=".5"/><rect x="15" y="14" width="3" height="3" rx="0.5" fill="#fff" opacity=".5"/></svg>
+        </div>
         <h3>Reusable CI/CD Templates</h3>
         <p>A reusable CI/CD template library - GitHub Actions reusable workflows + GitLab CI templates + a Jenkins shared library - demonstrated end-to-end on a bundled sample app with security gates.</p>
         <div class="project-tags">
