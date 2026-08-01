@@ -144,51 +144,20 @@
     .term-line .key { color: var(--purple); }
     .term-line .comment { color: #484f58; }
 
-    /* hero split panel */
-    .hero-split {
-      display: grid; grid-template-columns: 55% 45%; gap: 0;
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: var(--radius); overflow: hidden;
-      font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+    /* live metrics inside terminal */
+    .live-metrics {
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: .7rem .85rem; margin: .4rem 0;
+      background: rgba(14,165,233,.04);
     }
-    .hero-terminal {
-      padding: 1.25rem 1.25rem 1.25rem 1.25rem;
-      border-right: 1px solid var(--border);
-    }
-    .hero-dashboard {
-      padding: 1.25rem; background: rgba(14,165,233,.03);
-    }
-    .dash-title {
-      font-size: .65rem; font-weight: 700; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--muted); margin-bottom: .9rem;
-    }
-    .dash-row {
-      display: flex; align-items: center; gap: .45rem;
-      margin-bottom: .45rem; font-size: .73rem;
-    }
-    .dash-label { color: var(--muted); flex: 1; }
-    .dash-val { color: var(--fg); font-size: .73rem; }
-    .dash-val.accent { color: var(--accent); }
-    .dash-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .dot-green { background: var(--green); box-shadow: 0 0 5px var(--green); }
-    .dot-yellow { background: #fbbf24; }
-    .dash-bar-row { padding-left: 1.1rem; margin-bottom: .6rem; }
-    .dash-sublabel { font-size: .66rem; color: #484f58; }
-    .dash-bar {
-      height: 4px; background: var(--bg3); border-radius: 2px;
-      margin: .3rem 0 .65rem; overflow: hidden;
-    }
-    .dash-bar-fill {
-      height: 100%; border-radius: 2px; background: var(--accent);
-      animation: grow 1.4s ease-out forwards;
-    }
-    .dash-bar-fill.purple { background: var(--purple); }
-    .dash-divider { border-top: 1px solid var(--border); margin: .75rem 0; }
-    @keyframes grow { from { width: 0 } }
-    @media (max-width: 768px) {
-      .hero-split { grid-template-columns: 1fr; }
-      .hero-terminal { border-right: none; border-bottom: 1px solid var(--border); }
-    }
+    .lm-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: .3rem; }
+    .lm-label { color: var(--muted); font-size: .75rem; }
+    .lm-val { color: var(--accent); font-size: .75rem; font-weight: 600; transition: color .3s; }
+    .lm-val.lm-purple { color: var(--purple); }
+    .lm-track { height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+    .lm-bar { height: 100%; border-radius: 2px; transition: width .9s ease; }
+    .lm-bar-cyan { background: var(--accent); }
+    .lm-bar-purple { background: var(--purple); }
 
     /* glow bg */
     .glow {
@@ -438,103 +407,72 @@
       </div>
     </div>
 
-    <!-- ── HERO VISUAL: SPLIT PANEL ── -->
-    <div class="hero-split">
-
-      <!-- LEFT: Terminal -->
-      <div class="hero-terminal">
-        <div class="term-bar">
-          <div class="term-dot d-red"></div>
-          <div class="term-dot d-yellow"></div>
-          <div class="term-dot d-green"></div>
-          <span style="font-size:.7rem;color:var(--muted);margin-left:.5rem">solutions-sdlc ~ SiriusAI-AKS</span>
-        </div>
-        <div class="term-line"><span class="comment"># TRecos + NUMO SDLC on AKS</span></div>
-        <div class="term-line"><span class="cmd">$ kubectl</span> get pods -n solutions-sdlc</div>
-        <div class="term-line"><span class="val">sdlc-backend-7d9f&nbsp;&nbsp;2/2&nbsp;&nbsp;Running</span></div>
-        <div class="term-line"><span class="val">sdlc-frontend-4b2c&nbsp;2/2&nbsp;&nbsp;Running</span></div>
-        <div class="term-line"><span class="val">trecos-api-9a1e&nbsp;&nbsp;&nbsp;&nbsp;3/3&nbsp;&nbsp;Running</span></div>
-        <br>
-        <div class="term-line"><span class="cmd">$ argo</span> submit ml-training.yaml</div>
-        <div class="term-line"><span class="key">train&nbsp;&nbsp;</span><span class="val">✔ Succeeded&nbsp;&nbsp;2m34s</span></div>
-        <div class="term-line"><span class="key">eval&nbsp;&nbsp;&nbsp;</span><span class="val">✔ accuracy=0.97</span></div>
-        <div class="term-line"><span class="key">serve&nbsp;&nbsp;</span><span class="val">✔ Running</span></div>
-        <br>
-        <div class="term-line"><span class="cmd">$ helm</span> upgrade sdlc-backend ./helm</div>
-        <div class="term-line"><span class="val">Release "sdlc-backend" upgraded ✓</span></div>
-        <div class="term-line"><span class="comment"># Trivy: 0 HIGH · 0 CRITICAL</span></div>
-      </div>
-
-      <!-- RIGHT: Live Dashboard -->
-      <div class="hero-dashboard">
-        <div class="dash-title">Platform Status</div>
-
-        <div class="dash-row">
-          <span class="dash-dot dot-green"></span>
-          <span class="dash-label">RAG Pipeline</span>
-          <span class="dash-val">Active</span>
-        </div>
-        <div class="dash-bar-row">
-          <span class="dash-sublabel">pgvector · 1536-dim · cosine sim</span>
-        </div>
-
-        <div class="dash-divider"></div>
-
-        <div class="dash-row">
-          <span class="dash-label">gpt-4o latency</span>
-          <span class="dash-val accent">p95: 890ms</span>
-        </div>
-        <div class="dash-bar"><div class="dash-bar-fill" style="width:72%"></div></div>
-
-        <div class="dash-row" style="margin-top:.75rem">
-          <span class="dash-label">Embedding throughput</span>
-          <span class="dash-val accent">1.2k / hr</span>
-        </div>
-        <div class="dash-bar"><div class="dash-bar-fill purple" style="width:58%"></div></div>
-
-        <div class="dash-divider"></div>
-
-        <div class="dash-row">
-          <span class="dash-dot dot-green"></span>
-          <span class="dash-label">Pods healthy</span>
-          <span class="dash-val">7 / 7</span>
-        </div>
-        <div class="dash-row">
-          <span class="dash-dot dot-green"></span>
-          <span class="dash-label">Last deploy</span>
-          <span class="dash-val">2m ago</span>
-        </div>
-        <div class="dash-row">
-          <span class="dash-dot dot-green"></span>
-          <span class="dash-label">Trivy vulns</span>
-          <span class="dash-val">0 HIGH</span>
-        </div>
-        <div class="dash-row">
-          <span class="dash-dot dot-yellow"></span>
-          <span class="dash-label">Langfuse traces</span>
-          <span class="dash-val">1.2k today</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ── BACKUP: original terminal (hidden) ──
+    <!-- ── HERO VISUAL: Terminal + Live Metrics ── -->
     <div class="hero-visual">
       <div class="term-bar">
-        <div class="term-dot d-red"></div><div class="term-dot d-yellow"></div><div class="term-dot d-green"></div>
+        <div class="term-dot d-red"></div>
+        <div class="term-dot d-yellow"></div>
+        <div class="term-dot d-green"></div>
+        <span style="font-size:.7rem;color:var(--muted);margin-left:.5rem">solutions-sdlc ~ SiriusAI-AKS</span>
       </div>
-      <div class="term-line"><span class="comment"># Platform engineering at scale</span></div>
-      <div class="term-line"><span class="cmd">$ kubectl</span> get nodes -o wide</div>
-      <div class="term-line"><span class="val">aks-system-001  Ready  control-plane</span></div>
-      <div class="term-line"><span class="val">aks-ai-001      Ready  worker</span></div>
-      <div class="term-line"><span class="val">aks-app-001     Ready  worker</span></div>
-      <div class="term-line"><span class="cmd">$ terraform</span> apply -var="env=prod"</div>
-      <div class="term-line"><span class="val">Apply complete! 9 environments ✓</span></div>
-      <div class="term-line"><span class="cmd">$ helm</span> upgrade --install mlflow ./charts</div>
-      <div class="term-line"><span class="val">Release "mlflow" has been upgraded ✓</span></div>
-      <div class="term-line"><span class="comment"># Cost savings: -40% via Karpenter</span></div>
+      <div class="term-line"><span class="comment"># TRecos + NUMO SDLC on AKS</span></div>
+      <div class="term-line"><span class="cmd">$ kubectl</span> get pods -n solutions-sdlc</div>
+      <div class="term-line"><span class="val">sdlc-backend-7d9f&nbsp;&nbsp;2/2&nbsp;&nbsp;Running</span></div>
+      <div class="term-line"><span class="val">sdlc-frontend-4b2c&nbsp;2/2&nbsp;&nbsp;Running</span></div>
+      <div class="term-line"><span class="val">trecos-api-9a1e&nbsp;&nbsp;&nbsp;&nbsp;3/3&nbsp;&nbsp;Running</span></div>
+      <br>
+      <div class="term-line"><span class="cmd">$ argo</span> submit ml-training.yaml</div>
+      <div class="term-line"><span class="key">train&nbsp;&nbsp;</span><span class="val">✔ Succeeded&nbsp;&nbsp;2m34s</span></div>
+      <div class="term-line"><span class="key">eval&nbsp;&nbsp;&nbsp;</span><span class="val">✔ accuracy=0.97</span></div>
+      <div class="term-line"><span class="key">serve&nbsp;&nbsp;</span><span class="val">✔ Running</span></div>
+      <br>
+      <!-- Live metrics block -->
+      <div class="live-metrics">
+        <div class="lm-row">
+          <span class="lm-label">gpt-4o latency</span>
+          <span class="lm-val" id="lm-lat">p95: 870ms</span>
+        </div>
+        <div class="lm-track"><div class="lm-bar lm-bar-cyan" id="lm-lat-bar" style="width:68%"></div></div>
+        <div class="lm-row" style="margin-top:.55rem">
+          <span class="lm-label">Embedding throughput</span>
+          <span class="lm-val lm-purple" id="lm-emb">1.18k / hr</span>
+        </div>
+        <div class="lm-track"><div class="lm-bar lm-bar-purple" id="lm-emb-bar" style="width:56%"></div></div>
+      </div>
+      <br>
+      <div class="term-line"><span class="cmd">$ helm</span> upgrade sdlc-backend ./helm</div>
+      <div class="term-line"><span class="val">Release "sdlc-backend" upgraded ✓</span></div>
+      <div class="term-line"><span class="comment"># Trivy: 0 HIGH · 0 CRITICAL</span></div>
     </div>
-    ──>
+
+    <script>
+    (function() {
+      var latencies = [
+        {ms:870,pct:68},{ms:910,pct:74},{ms:845,pct:63},{ms:960,pct:81},
+        {ms:830,pct:60},{ms:895,pct:72},{ms:1010,pct:88},{ms:858,pct:65}
+      ];
+      var throughputs = [
+        {val:'1.18k',pct:56},{val:'1.24k',pct:62},{val:'1.09k',pct:48},
+        {val:'1.31k',pct:70},{val:'1.15k',pct:53},{val:'1.27k',pct:64}
+      ];
+      var li = 0, ei = 0;
+      function tick() {
+        li = (li + 1) % latencies.length;
+        ei = (ei + 1) % throughputs.length;
+        var l = latencies[li], e = throughputs[ei];
+        var latEl = document.getElementById('lm-lat');
+        var latBar = document.getElementById('lm-lat-bar');
+        var embEl = document.getElementById('lm-emb');
+        var embBar = document.getElementById('lm-emb-bar');
+        if (!latEl) return;
+        latEl.textContent = 'p95: ' + l.ms + 'ms';
+        latBar.style.width = l.pct + '%';
+        embEl.textContent = e.val + ' / hr';
+        embBar.style.width = e.pct + '%';
+      }
+      setInterval(tick, 2000);
+    })();
+    </script>
   </div>
 </section>
 
