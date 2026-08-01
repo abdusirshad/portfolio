@@ -144,6 +144,52 @@
     .term-line .key { color: var(--purple); }
     .term-line .comment { color: #484f58; }
 
+    /* hero split panel */
+    .hero-split {
+      display: grid; grid-template-columns: 55% 45%; gap: 0;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+    }
+    .hero-terminal {
+      padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+      border-right: 1px solid var(--border);
+    }
+    .hero-dashboard {
+      padding: 1.25rem; background: rgba(14,165,233,.03);
+    }
+    .dash-title {
+      font-size: .65rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: .9rem;
+    }
+    .dash-row {
+      display: flex; align-items: center; gap: .45rem;
+      margin-bottom: .45rem; font-size: .73rem;
+    }
+    .dash-label { color: var(--muted); flex: 1; }
+    .dash-val { color: var(--fg); font-size: .73rem; }
+    .dash-val.accent { color: var(--accent); }
+    .dash-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .dot-green { background: var(--green); box-shadow: 0 0 5px var(--green); }
+    .dot-yellow { background: #fbbf24; }
+    .dash-bar-row { padding-left: 1.1rem; margin-bottom: .6rem; }
+    .dash-sublabel { font-size: .66rem; color: #484f58; }
+    .dash-bar {
+      height: 4px; background: var(--bg3); border-radius: 2px;
+      margin: .3rem 0 .65rem; overflow: hidden;
+    }
+    .dash-bar-fill {
+      height: 100%; border-radius: 2px; background: var(--accent);
+      animation: grow 1.4s ease-out forwards;
+    }
+    .dash-bar-fill.purple { background: var(--purple); }
+    .dash-divider { border-top: 1px solid var(--border); margin: .75rem 0; }
+    @keyframes grow { from { width: 0 } }
+    @media (max-width: 768px) {
+      .hero-split { grid-template-columns: 1fr; }
+      .hero-terminal { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+
     /* glow bg */
     .glow {
       position: absolute; border-radius: 50%; filter: blur(80px); opacity: .12; pointer-events: none;
@@ -392,29 +438,103 @@
       </div>
     </div>
 
+    <!-- ── HERO VISUAL: SPLIT PANEL ── -->
+    <div class="hero-split">
+
+      <!-- LEFT: Terminal -->
+      <div class="hero-terminal">
+        <div class="term-bar">
+          <div class="term-dot d-red"></div>
+          <div class="term-dot d-yellow"></div>
+          <div class="term-dot d-green"></div>
+          <span style="font-size:.7rem;color:var(--muted);margin-left:.5rem">solutions-sdlc ~ SiriusAI-AKS</span>
+        </div>
+        <div class="term-line"><span class="comment"># TRecos + NUMO SDLC on AKS</span></div>
+        <div class="term-line"><span class="cmd">$ kubectl</span> get pods -n solutions-sdlc</div>
+        <div class="term-line"><span class="val">sdlc-backend-7d9f&nbsp;&nbsp;2/2&nbsp;&nbsp;Running</span></div>
+        <div class="term-line"><span class="val">sdlc-frontend-4b2c&nbsp;2/2&nbsp;&nbsp;Running</span></div>
+        <div class="term-line"><span class="val">trecos-api-9a1e&nbsp;&nbsp;&nbsp;&nbsp;3/3&nbsp;&nbsp;Running</span></div>
+        <br>
+        <div class="term-line"><span class="cmd">$ argo</span> submit ml-training.yaml</div>
+        <div class="term-line"><span class="key">train&nbsp;&nbsp;</span><span class="val">✔ Succeeded&nbsp;&nbsp;2m34s</span></div>
+        <div class="term-line"><span class="key">eval&nbsp;&nbsp;&nbsp;</span><span class="val">✔ accuracy=0.97</span></div>
+        <div class="term-line"><span class="key">serve&nbsp;&nbsp;</span><span class="val">✔ Running</span></div>
+        <br>
+        <div class="term-line"><span class="cmd">$ helm</span> upgrade sdlc-backend ./helm</div>
+        <div class="term-line"><span class="val">Release "sdlc-backend" upgraded ✓</span></div>
+        <div class="term-line"><span class="comment"># Trivy: 0 HIGH · 0 CRITICAL</span></div>
+      </div>
+
+      <!-- RIGHT: Live Dashboard -->
+      <div class="hero-dashboard">
+        <div class="dash-title">Platform Status</div>
+
+        <div class="dash-row">
+          <span class="dash-dot dot-green"></span>
+          <span class="dash-label">RAG Pipeline</span>
+          <span class="dash-val">Active</span>
+        </div>
+        <div class="dash-bar-row">
+          <span class="dash-sublabel">pgvector · 1536-dim · cosine sim</span>
+        </div>
+
+        <div class="dash-divider"></div>
+
+        <div class="dash-row">
+          <span class="dash-label">gpt-4o latency</span>
+          <span class="dash-val accent">p95: 890ms</span>
+        </div>
+        <div class="dash-bar"><div class="dash-bar-fill" style="width:72%"></div></div>
+
+        <div class="dash-row" style="margin-top:.75rem">
+          <span class="dash-label">Embedding throughput</span>
+          <span class="dash-val accent">1.2k / hr</span>
+        </div>
+        <div class="dash-bar"><div class="dash-bar-fill purple" style="width:58%"></div></div>
+
+        <div class="dash-divider"></div>
+
+        <div class="dash-row">
+          <span class="dash-dot dot-green"></span>
+          <span class="dash-label">Pods healthy</span>
+          <span class="dash-val">7 / 7</span>
+        </div>
+        <div class="dash-row">
+          <span class="dash-dot dot-green"></span>
+          <span class="dash-label">Last deploy</span>
+          <span class="dash-val">2m ago</span>
+        </div>
+        <div class="dash-row">
+          <span class="dash-dot dot-green"></span>
+          <span class="dash-label">Trivy vulns</span>
+          <span class="dash-val">0 HIGH</span>
+        </div>
+        <div class="dash-row">
+          <span class="dash-dot dot-yellow"></span>
+          <span class="dash-label">Langfuse traces</span>
+          <span class="dash-val">1.2k today</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── BACKUP: original terminal (hidden) ──
     <div class="hero-visual">
       <div class="term-bar">
-        <div class="term-dot d-red"></div>
-        <div class="term-dot d-yellow"></div>
-        <div class="term-dot d-green"></div>
+        <div class="term-dot d-red"></div><div class="term-dot d-yellow"></div><div class="term-dot d-green"></div>
       </div>
       <div class="term-line"><span class="comment"># Platform engineering at scale</span></div>
       <div class="term-line"><span class="cmd">$ kubectl</span> get nodes -o wide</div>
-      <div class="term-line"><span class="val">NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATUS&nbsp;&nbsp;ROLES</span></div>
-      <div class="term-line"><span class="val">aks-system-001&nbsp;&nbsp;Ready&nbsp;&nbsp;control-plane</span></div>
-      <div class="term-line"><span class="val">aks-ai-001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ready&nbsp;&nbsp;worker</span></div>
-      <div class="term-line"><span class="val">aks-app-001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ready&nbsp;&nbsp;worker</span></div>
-      <br>
+      <div class="term-line"><span class="val">aks-system-001  Ready  control-plane</span></div>
+      <div class="term-line"><span class="val">aks-ai-001      Ready  worker</span></div>
+      <div class="term-line"><span class="val">aks-app-001     Ready  worker</span></div>
       <div class="term-line"><span class="cmd">$ terraform</span> apply -var="env=prod"</div>
-      <div class="term-line"><span class="key">Plan:</span> <span class="val">9 to add, 0 to destroy</span></div>
       <div class="term-line"><span class="val">Apply complete! 9 environments ✓</span></div>
-      <br>
       <div class="term-line"><span class="cmd">$ helm</span> upgrade --install mlflow ./charts</div>
       <div class="term-line"><span class="val">Release "mlflow" has been upgraded ✓</span></div>
-      <br>
       <div class="term-line"><span class="comment"># Cost savings: -40% via Karpenter</span></div>
-      <div class="term-line"><span class="comment"># Uptime: 99.99% | Vulns fixed: 100+</span></div>
     </div>
+    ──>
   </div>
 </section>
 
