@@ -279,6 +279,7 @@
     }
     .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
     .exp-bullets li strong { color: var(--text); }
+    .exp-bullets li code { font-family: 'JetBrains Mono', monospace; font-size: .78rem; background: var(--bg3); padding: .1rem .35rem; border-radius: 4px; color: var(--accent2); }
 
     /* ── CERTIFICATIONS ── */
     .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
@@ -763,12 +764,13 @@
             <span style="font-size:.78rem;color:var(--muted);font-family:'JetBrains Mono',monospace">Gurugram, India</span>
           </div>
           <ul class="exp-bullets">
-            <li>Architected scalable Kubernetes infrastructure for <strong>NUMO (AI for SDLC)</strong> platform at <strong>First Abu Dhabi Bank (FAB UAE)</strong>, supporting secure banking workloads with high availability and regulatory compliance.</li>
-            <li>Orchestrated <strong>Kubernetes infrastructure (EKS/AKS)</strong> migration, enabling scalable model training, inference pipelines, and microservices-based applications, leading to <strong>30% faster model deployment</strong> cycles and improved resource utilization.</li>
-            <li>Implemented <strong>MLOps workflows</strong> using MLflow, Docker, and Kubernetes, automating model packaging, versioning, and deployment across staging and production environments.</li>
-            <li>Built secure <strong>CI/CD pipelines</strong> integrating GitLab with automated model validation, container scanning, and policy enforcement, reducing release cycles by <strong>35%</strong>.</li>
-            <li>Automated infrastructure provisioning using <strong>Terraform and Helm</strong>, delivering reproducible AI environments and reducing deployment time by <strong>80%</strong>.</li>
-            <li>Led migration of SiriusAI <strong>Azure infrastructure from India to US tenant</strong> using Terraform, re-architecting networking, IAM, Key Vault, AKS clusters, and storage with <strong>zero data loss</strong>; rebuilt Azure DevOps CI/CD with validation gates and policy enforcement.</li>
+            <li>Designed and deployed <strong>TRecos</strong> real-time recommendation engine on <strong>AKS with NVIDIA GPU node pools</strong> - Argo Workflows for ML training orchestration, Azure OpenAI (gpt-4o + text-embedding-3-small) for inference, and pgvector RAG pipeline with 1536-dim cosine similarity retrieval for banking-grade recommendations.</li>
+            <li>Architected and shipped <strong>NUMO SDLC</strong> AI delivery platform for <strong>First Abu Dhabi Bank (FAB, UAE)</strong> - automating BRD authoring, Jira story generation, Confluence page creation, and BDD .feature file commits to GitHub via FastAPI + Azure OpenAI RAG pipeline on AKS.</li>
+            <li>Implemented <strong>Azure AD group-based RBAC</strong> across 6 NUMO product modules (brd, confluence, jira, design, pair-programming, testing) using MSAL JWT validation and Microsoft Graph API for group overage resolution; integrated Jira and Confluence via <strong>OAuth 2.0</strong>.</li>
+            <li>Built multi-store data architecture for NUMO: <strong>PostgreSQL + pgvector</strong> for structured data and RAG embeddings, <strong>Azure Cosmos DB</strong> (TTL, session_id partition key) for multi-turn BRD chat history, and <strong>Azure Blob Storage</strong> for BRD document persistence - with Langfuse for LLM trace and cost attribution.</li>
+            <li>Built <strong>Azure DevOps CI/CD pipelines</strong> for both platforms: docker build → Trivy scan (HIGH/CRITICAL, exit-code 1) → ACR push → <code>helm upgrade --install</code> on SiriusAI-Solutions-AKS, with environment secrets injected via Helm values and Azure Key Vault at runtime.</li>
+            <li>Provisioned and managed <strong>AKS cluster infrastructure</strong> using Terraform and Helm - namespace isolation (solutions-sdlc, solutions-trecos), App Gateway ingress with TLS termination, ACR integration via managed identity, and Azure Monitor for pod-level observability.</li>
+            <li>Led migration of SiriusAI <strong>Azure infrastructure from India to US tenant</strong> using Terraform, re-architecting VNets, Entra ID, Key Vault, AKS clusters, and ACR with <strong>zero data loss</strong>; rebuilt all Azure DevOps pipelines with policy gates and Trivy scan enforcement.</li>
           </ul>
         </div>
       </div>
