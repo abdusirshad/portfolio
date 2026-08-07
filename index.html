@@ -9,11 +9,14 @@
   <meta property="og:url" content="https://abdusirshad.github.io/portfolio" />
   <meta property="og:title" content="Md. Irshad - Lead AI Platform & MLOps Engineer" />
   <meta property="og:description" content="7+ years on AWS & Azure. Kubernetes, Terraform, MLOps, RAG pipelines, CI/CD & Observability - all with real production code. CKA · AZ-104 certified." />
-  <meta property="og:image" content="https://abdusirshad.github.io/portfolio/og-thumbnail.svg" />
+  <meta property="og:image" content="https://abdusirshad.github.io/portfolio/og-thumbnail.png" />
   <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="627" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://abdusirshad.github.io/portfolio/og-thumbnail.svg" />
+  <meta name="twitter:title" content="Md. Irshad - Lead AI Platform & MLOps Engineer" />
+  <meta name="twitter:description" content="AWS, Azure, Kubernetes, Terraform, RAG pipelines, DevSecOps, and production AI platforms for regulated environments." />
+  <meta name="twitter:image" content="https://abdusirshad.github.io/portfolio/og-thumbnail.png" />
+  <link rel="canonical" href="https://abdusirshad.github.io/portfolio" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
@@ -43,20 +46,57 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
+    .skip-link {
+      position: fixed;
+      top: 12px; left: 12px; z-index: 200;
+      transform: translateY(-140%);
+      padding: 0.55rem 0.8rem;
+      border-radius: 8px;
+      background: #fff;
+      color: #050505;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.82rem;
+      transition: transform 0.2s;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .page-progress {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 160;
+      height: 2px; pointer-events: none;
+    }
+    .page-progress span {
+      display: block; height: 100%; width: 100%;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: linear-gradient(90deg, var(--accent), #34d399);
+      box-shadow: 0 0 18px rgba(59,130,246,0.35);
+    }
+
     /* ── ANIMATIONS ── */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
+    .reveal-card {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
+      .reveal, .reveal-card { opacity: 1; transform: none; transition: none; }
       .cursor { animation: none !important; }
+      .hero-flow { animation: none !important; opacity: 0.35 !important; }
     }
 
     /* ── NAVIGATION ── */
@@ -65,9 +105,9 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 clamp(1.5rem, 5vw, 4rem);
       height: 72px;
-      background: rgba(5,5,5,0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(5,5,5,0.55);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
     }
     .nav-logo {
@@ -82,16 +122,20 @@
       transition: color 0.3s;
       letter-spacing: -0.01em;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
     .nav-resume {
       padding: 0.5rem 1.25rem; border-radius: 8px;
-      background: var(--accent); color: #fff; font-weight: 600; font-size: 0.8rem;
-      text-decoration: none; transition: background 0.3s, transform 0.2s;
+      background: transparent; color: var(--text); font-weight: 500; font-size: 0.8rem;
+      text-decoration: none; transition: color 0.3s;
       letter-spacing: -0.01em;
+      border: 1px solid rgba(255,255,255,0.15);
     }
-    .nav-resume:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .nav-resume:hover { color: var(--text); border-color: rgba(255,255,255,0.4); }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
     .hamburger span { width: 20px; height: 1.5px; background: var(--text); border-radius: 2px; transition: transform 0.3s; }
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { transform: scaleX(0); }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
     /* ── HERO ── */
     #hero {
@@ -105,7 +149,7 @@
       position: absolute;
       width: 800px; height: 800px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(59,130,246,0.024) 0%, transparent 70%);
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
@@ -125,10 +169,17 @@
       font-size: clamp(1rem, 2vw, 1.25rem);
       color: var(--muted);
       font-weight: 400;
-      margin-bottom: 2.5rem;
+      margin-bottom: 0.85rem;
       letter-spacing: -0.01em;
     }
     .hero-role strong { color: var(--accent); font-weight: 600; }
+    .hero-current {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 2.25rem;
+      letter-spacing: -0.01em;
+    }
+    .hero-current strong { color: var(--text); font-weight: 600; }
     .hero-techs {
       display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem;
       margin-bottom: 3rem;
@@ -143,6 +194,30 @@
       letter-spacing: -0.01em;
     }
     .hero-tech:hover { border-color: rgba(59,130,246,0.4); color: var(--text); }
+    .hero-flow {
+      display: flex; align-items: center; justify-content: center; gap: 0;
+      margin-bottom: 3rem; opacity: 0.35;
+    }
+    .hero-flow-node {
+      font-size: 0.65rem; font-weight: 500; color: var(--muted);
+      padding: 0.35rem 0.75rem; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; background: rgba(255,255,255,0.02);
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+    .hero-flow-arrow {
+      width: 24px; height: 1px; background: rgba(255,255,255,0.15);
+      position: relative;
+    }
+    .hero-flow-arrow::after {
+      content: ''; position: absolute; right: 0; top: -2px;
+      border: 2px solid transparent; border-left: 3px solid rgba(255,255,255,0.2);
+    }
+    @keyframes flowPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+    .hero-flow { animation: flowPulse 4s ease-in-out infinite; }
     .hero-btns {
       display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
     }
@@ -166,8 +241,8 @@
     section { padding: clamp(80px, 12vw, 140px) clamp(1.5rem, 5vw, 4rem); }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label {
-      font-size: 0.75rem; font-weight: 600;
-      color: var(--accent);
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-bottom: 1rem;
@@ -184,42 +259,37 @@
       margin-bottom: 3.5rem;
     }
 
-    /* ── ABOUT ── */
+    /* ── IMPACT ── */
     #about {
       border-top: 1px solid var(--border);
       background: var(--bg2);
     }
-    .about-grid {
-      display: grid; grid-template-columns: 1.2fr 1fr;
-      gap: 4rem; align-items: start;
+    .impact-stats {
+      display: flex; gap: 0; margin-bottom: 3rem;
+      flex-wrap: wrap;
     }
-    .about-text {
-      font-size: 1.05rem; color: var(--muted); line-height: 1.85;
+    .impact-stat {
+      padding: 0 2.5rem;
+      border-right: 1px solid var(--border);
     }
-    .about-text strong { color: var(--text); font-weight: 600; }
-    .about-text p + p { margin-top: 1.5rem; }
-    .about-stats {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
-    }
-    .about-stat {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    .about-stat:hover { border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.03); }
-    .about-stat-num {
-      font-size: 2.5rem; font-weight: 800;
+    .impact-stat:first-child { padding-left: 0; }
+    .impact-stat:last-child { border-right: none; }
+    .impact-stat-num {
+      font-size: 2.75rem; font-weight: 800;
       color: var(--text);
       letter-spacing: -0.04em;
-      margin-bottom: 0.25rem;
       line-height: 1;
+      margin-bottom: 0.4rem;
     }
-    .about-stat-label {
-      font-size: 0.78rem; color: var(--muted); font-weight: 500;
-      text-transform: uppercase; letter-spacing: 0.04em;
+    .impact-stat-label {
+      font-size: 0.72rem; color: var(--muted); font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.05em;
     }
+    .impact-text {
+      max-width: 720px;
+      font-size: 1.05rem; color: var(--muted); line-height: 1.85;
+    }
+    .impact-text strong { color: var(--text); font-weight: 600; }
 
     /* ── EXPERIENCE ── */
     #experience {
@@ -248,9 +318,16 @@
     .timeline-card::before {
       content: '';
       position: absolute; left: -2rem; top: 3.5rem;
-      width: 8px; height: 8px; border-radius: 50%;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--text);
+      opacity: 0.4;
+      transition: background 0.45s, opacity 0.45s, box-shadow 0.45s, transform 0.45s;
+    }
+    .timeline-card.visible::before {
+      opacity: 1;
       background: var(--accent);
-      box-shadow: 0 0 12px rgba(59,130,246,0.4);
+      transform: scale(1.25);
+      box-shadow: 0 0 0 6px rgba(59,130,246,0.08), 0 0 24px rgba(59,130,246,0.22);
     }
     .exp-header {
       display: flex; justify-content: space-between; align-items: flex-start;
@@ -269,17 +346,21 @@
       border-radius: 6px;
     }
     .exp-role {
-      font-size: 0.9rem; color: var(--accent); font-weight: 600;
+      font-size: 0.9rem; color: var(--muted); font-weight: 500;
       margin-bottom: 1.25rem;
     }
     .exp-metrics {
-      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      display: flex; gap: 0; flex-wrap: wrap;
       margin-bottom: 1.5rem; padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--border);
     }
     .exp-metric {
       display: flex; flex-direction: column;
+      padding: 0 1.5rem;
+      border-right: 1px solid var(--border);
     }
+    .exp-metric:first-child { padding-left: 0; }
+    .exp-metric:last-child { border-right: none; }
     .exp-metric-num {
       font-size: 1.5rem; font-weight: 800; color: var(--text);
       letter-spacing: -0.03em; line-height: 1;
@@ -297,7 +378,7 @@
       content: '';
       position: absolute; left: 0; top: 0.65rem;
       width: 4px; height: 4px; border-radius: 50%;
-      background: var(--accent); opacity: 0.7;
+      background: var(--muted); opacity: 0.5;
     }
     .exp-bullets li strong { color: var(--text); font-weight: 600; }
     .exp-bullets li code {
@@ -313,8 +394,8 @@
     .exp-tech-tag {
       padding: 0.25rem 0.6rem; border-radius: 5px;
       font-size: 0.7rem; font-weight: 500;
-      background: rgba(59,130,246,0.06); color: var(--accent);
-      border: 1px solid rgba(59,130,246,0.12);
+      background: rgba(255,255,255,0.03); color: var(--muted);
+      border: 1px solid var(--border);
     }
 
     /* ── PROJECTS ── */
@@ -324,7 +405,7 @@
     }
     .projects-label {
       font-size: 0.7rem; font-weight: 600;
-      color: var(--accent); text-transform: uppercase;
+      color: var(--muted); text-transform: uppercase;
       letter-spacing: 0.12em; margin-bottom: 1.5rem;
     }
     .projects-featured {
@@ -339,11 +420,12 @@
       display: flex; flex-direction: column;
       transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
       text-decoration: none; color: inherit;
+      box-shadow: 0 0 0 rgba(59,130,246,0);
     }
     .project-card:hover {
       border-color: rgba(59,130,246,0.5);
       transform: translateY(-6px);
-      box-shadow: 0 30px 80px rgba(59,130,246,0.08), 0 0 0 1px rgba(59,130,246,0.1);
+      box-shadow: 0 25px 80px rgba(59,130,246,0.12), 0 0 0 1px rgba(59,130,246,0.1);
     }
     .project-card.featured {
       border-color: rgba(59,130,246,0.2);
@@ -354,18 +436,11 @@
       display: inline-flex; align-self: flex-start;
       padding: 0.25rem 0.7rem; border-radius: 99px;
       font-size: 0.65rem; font-weight: 700;
-      background: rgba(59,130,246,0.15); color: var(--accent);
+      background: rgba(255,255,255,0.06); color: var(--text);
       letter-spacing: 0.05em; margin-bottom: 1rem;
       text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.1);
     }
-    .project-arch {
-      margin-bottom: 1.25rem;
-      padding: 1.25rem 1rem;
-      background: rgba(59,130,246,0.02);
-      border: 1px solid rgba(59,130,246,0.08);
-      border-radius: 12px;
-    }
-    .project-arch svg { width: 100%; height: auto; }
     .project-metrics {
       display: flex; flex-wrap: wrap; gap: 0.5rem;
       margin-bottom: 1rem;
@@ -377,6 +452,38 @@
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 6px;
     }
+    .project-case {
+      display: grid;
+      gap: 0.9rem;
+      margin-bottom: 1.25rem;
+    }
+    .project-case-row {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 1rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .project-case-row:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+    .project-case-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.64rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .project-case-content {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .project-case-content strong { color: var(--text); font-weight: 600; }
+    .project-case .project-tags,
+    .project-case .project-metrics { margin-bottom: 0; }
     .project-card h3 {
       font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;
       letter-spacing: -0.02em;
@@ -389,8 +496,8 @@
     .project-tag {
       padding: 0.25rem 0.65rem; border-radius: 6px;
       font-size: 0.72rem; font-weight: 500;
-      background: rgba(59,130,246,0.08); color: var(--accent);
-      border: 1px solid rgba(59,130,246,0.15);
+      background: rgba(255,255,255,0.04); color: var(--muted);
+      border: 1px solid var(--border);
     }
     .project-link {
       display: inline-flex; align-items: center; gap: 0.4rem;
@@ -405,83 +512,148 @@
       gap: 1.5rem;
     }
 
+    .case-study {
+      margin-bottom: 4rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .case-study-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 2rem;
+    }
+    .case-study h3 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+    .case-study-header p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .case-study-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--border);
+    }
+    .case-study-panel {
+      background: var(--bg2);
+      padding: 1.35rem;
+    }
+    .case-study-panel span {
+      display: block;
+      margin-bottom: 0.65rem;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.64rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .case-study-panel p {
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.65;
+    }
+
+    /* ── BROWSER MOCKUP ── */
+    .browser-frame {
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+      background: #0A0A0A;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    }
+    .browser-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .browser-dots {
+      display: flex; gap: 5px;
+    }
+    .browser-dots span {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+    }
+    .browser-url {
+      flex: 1; margin-left: 8px;
+      padding: 4px 10px; border-radius: 5px;
+      background: rgba(255,255,255,0.04);
+      font-size: 0.65rem; color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .browser-body {
+      padding: 2.45rem 1.5rem;
+    }
+    .browser-body svg { width: 100%; height: auto; }
+
     /* ── SKILLS ── */
     #skills {
       border-top: 1px solid var(--border);
       background: var(--bg);
-      position: relative;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       overflow: hidden;
     }
-    #skills::after {
-      content: '';
-      position: absolute; bottom: -200px; left: 50%;
-      transform: translateX(-50%);
-      width: 600px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.03) 0%, transparent 70%);
-      pointer-events: none;
+    .skill-card {
+      background: var(--bg);
+      padding: 2rem;
     }
-    .skills-grid { display: flex; flex-direction: column; gap: 2.25rem; position: relative; }
-    .skill-row {
-      display: flex; gap: 1.5rem; align-items: flex-start;
-      padding: 1rem 1.5rem;
-      border-radius: 12px;
-      transition: background 0.3s;
+    .skill-card-title {
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.08em; margin-bottom: 1rem;
     }
-    .skill-row:hover { background: rgba(255,255,255,0.02); }
-    .skill-cat {
-      min-width: 140px; font-size: 0.75rem; font-weight: 700; color: var(--text);
-      padding-top: 0.4rem;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
+    .skill-card-items {
+      display: flex; flex-direction: column; gap: 0.4rem;
     }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .tag {
-      padding: 0.4rem 0.9rem; border-radius: 99px; font-size: 0.78rem; font-weight: 500;
-      background: transparent; border: 1px solid var(--border); color: var(--muted);
-      transition: border-color 0.3s, color 0.3s, background 0.3s;
+    .skill-card-items span {
+      font-size: 0.85rem; color: var(--text); font-weight: 500;
+      line-height: 1.6;
     }
-    .tag:hover { border-color: rgba(59,130,246,0.4); color: var(--text); background: rgba(59,130,246,0.04); }
-    .tag.highlight { border-color: rgba(59,130,246,0.4); color: var(--accent); background: rgba(59,130,246,0.08); }
+    .skill-card-items span.dim {
+      color: var(--muted); font-weight: 400;
+    }
 
     /* ── CERTIFICATIONS ── */
     #certifications {
       border-top: 1px solid var(--border);
       background: var(--bg2);
     }
-    .certs-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .certs-grid { display: flex; flex-direction: column; gap: 0; }
     .cert-card {
-      flex: 1; min-width: 280px;
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.25rem;
-      display: flex; flex-direction: column; gap: 1rem;
-      transition: border-color 0.3s, transform 0.3s, background 0.3s;
-      text-align: center; align-items: center;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
     }
-    .cert-card:hover {
-      border-color: rgba(59,130,246,0.4);
-      transform: translateY(-4px);
-      background: rgba(59,130,246,0.03);
-    }
-    .cert-icon {
-      width: 56px; height: 56px;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(59,130,246,0.06);
-      border: 1px solid rgba(59,130,246,0.12);
-      border-radius: 16px; font-size: 1.5rem;
-    }
+    .cert-card:last-child { border-bottom: none; }
     .cert-info h4 {
-      font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem;
-      letter-spacing: -0.02em;
+      font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem;
+      letter-spacing: -0.01em; color: var(--text);
     }
     .cert-info p { font-size: 0.8rem; color: var(--muted); }
     .cert-badge {
-      padding: 0.3rem 0.85rem; border-radius: 99px;
-      font-size: 0.7rem; font-weight: 700;
-      background: rgba(59,130,246,0.1); color: var(--accent);
-      border: 1px solid rgba(59,130,246,0.2);
-      white-space: nowrap;
+      font-size: 0.8rem; font-weight: 500;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
     }
 
     /* ── FREELANCE ── */
@@ -514,13 +686,13 @@
       display: inline-flex; align-items: center; gap: 0.5rem;
       padding: 0.4rem 1rem; border-radius: 99px;
       font-size: 0.78rem; font-weight: 600;
-      background: rgba(59,130,246,0.08);
-      border: 1px solid rgba(59,130,246,0.2);
-      color: var(--accent); margin-bottom: 2rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text); margin-bottom: 2rem;
     }
     .avail-badge span {
       width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent); animation: pulse 2s infinite;
+      background: #34d399; animation: pulse 2s infinite;
     }
     @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
 
@@ -529,12 +701,13 @@
       border-top: 1px solid var(--border);
       text-align: center;
       background: var(--bg2);
-      padding-top: clamp(100px, 14vw, 180px);
-      padding-bottom: clamp(100px, 14vw, 180px);
+      padding-top: clamp(120px, 16vw, 220px);
+      padding-bottom: clamp(120px, 16vw, 220px);
     }
     #contact h2 {
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(2.5rem, 6vw, 4rem);
       margin-bottom: 1.5rem;
+      letter-spacing: -0.04em;
     }
     .contact-inner { max-width: 600px; margin: 0 auto; }
     .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
@@ -558,27 +731,69 @@
       border-top: 1px solid var(--border);
       font-size: 0.8rem; color: var(--muted);
     }
+    .footer-meta {
+      display: flex; justify-content: center; align-items: center; gap: 1.25rem;
+      margin-bottom: 1.5rem; flex-wrap: wrap;
+      font-size: 0.75rem; color: var(--muted);
+    }
+    .footer-sep {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
     footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { color: var(--accent-hover); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .impact-stats { flex-direction: column; gap: 1.5rem; }
+      .impact-stat { padding: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+      .impact-stat:last-child { border-bottom: none; padding-bottom: 0; }
       .projects-featured { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px; left: 0; right: 0;
+        gap: 1.25rem;
+        padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
+        border-bottom: 1px solid var(--border);
+        background: rgba(5,5,5,0.94);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+      }
+      .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
       .hamburger { display: flex; }
+      .case-study-header { grid-template-columns: 1fr; gap: 1rem; }
+      .case-study-grid { grid-template-columns: 1fr; }
+      .project-case-row { grid-template-columns: 1fr; gap: 0.35rem; }
+      .skills-grid { grid-template-columns: 1fr; }
       .skill-row { flex-direction: column; gap: 0.75rem; padding: 0.75rem 1rem; }
       .skill-cat { min-width: unset; }
       .timeline-card { padding: 2rem 0; }
       .timeline-card::before { display: none; }
       .exp-header { flex-direction: column; }
+      .exp-metrics { flex-direction: column; gap: 1rem; }
+      .exp-metric { padding: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+      .exp-metric:last-child { border-bottom: none; padding-bottom: 0; }
       .freelance-grid { grid-template-columns: 1fr; }
       .certs-grid { flex-direction: column; }
+      .browser-frame { margin: 0 -0.5rem; }
+      .hero-flow { display: none; }
     }
 
     @media (max-width: 480px) {
-      .about-stats { grid-template-columns: 1fr; }
+      .impact-stats { gap: 1rem; }
       .hero-techs { gap: 0.5rem; }
       .freelance-grid { grid-template-columns: 1fr; }
     }
@@ -592,11 +807,13 @@
   </style>
 </head>
 <body>
+<a href="#about" class="skip-link">Skip to content</a>
+<div class="page-progress" aria-hidden="true"><span></span></div>
 
 <!-- ── NAVIGATION ── -->
-<nav>
+<nav aria-label="Primary">
   <a href="#hero" class="nav-logo">Md. Irshad</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="primary-menu">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -604,8 +821,8 @@
     <li><a href="#certifications">Certifications</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="MD_Irshad_Resume.pdf" download="MD_Irshad_Resume.pdf" class="nav-resume">Resume</a>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation">
+  <a href="MD_Irshad_Resume.pdf" download="MD_Irshad_Resume.pdf" class="nav-resume">Resume &rarr;</a>
+  <button class="hamburger" id="menu-toggle" type="button" aria-label="Toggle navigation" aria-controls="primary-menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -616,6 +833,7 @@
   <div class="hero-content">
     <h1>Building AI Infrastructure<br>that scales.</h1>
     <p class="hero-role"><strong>Lead AI Platform & MLOps Engineer</strong> - 7+ years shipping production infrastructure on AWS & Azure for regulated banking and enterprise SaaS.</p>
+    <p class="hero-current">Currently building enterprise AI platforms at <strong>SiriusAI</strong>.</p>
     <div class="hero-techs">
       <span class="hero-tech">AWS</span>
       <span class="hero-tech">Azure</span>
@@ -624,6 +842,14 @@
       <span class="hero-tech">RAG Pipelines</span>
       <span class="hero-tech">DevSecOps</span>
     </div>
+    <div class="hero-flow">
+      <span class="hero-flow-node">GitHub</span><span class="hero-flow-arrow"></span>
+      <span class="hero-flow-node">Actions</span><span class="hero-flow-arrow"></span>
+      <span class="hero-flow-node">Terraform</span><span class="hero-flow-arrow"></span>
+      <span class="hero-flow-node">AKS</span><span class="hero-flow-arrow"></span>
+      <span class="hero-flow-node">Azure OpenAI</span><span class="hero-flow-arrow"></span>
+      <span class="hero-flow-node">Grafana</span>
+    </div>
     <div class="hero-btns">
       <a href="#projects" class="btn-primary">View Projects</a>
       <a href="MD_Irshad_Resume.pdf" download class="btn-outline">Download Resume</a>
@@ -631,35 +857,31 @@
   </div>
 </section>
 
-<!-- ── ABOUT ── -->
+<!-- ── ABOUT / IMPACT ── -->
 <section id="about">
   <div class="section-inner reveal">
-    <span class="section-label">About</span>
+    <span class="section-label">Selected Impact</span>
     <h2>Engineering infrastructure that ships AI to production.</h2>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>I'm a Lead AI Platform & MLOps Engineer based in Delhi, India, with <strong>7+ years</strong> of hands-on experience architecting and operating production platforms on <strong>AWS and Microsoft Azure</strong>. I specialize in <strong>Kubernetes, Terraform IaC, MLOps, and DevSecOps</strong> for regulated banking and fintech environments.</p>
-        <p>I built two enterprise AI platforms shipped to production: <strong>TRecos</strong> - a real-time recommendation engine on AKS with GPU node pools, Azure OpenAI, pgvector RAG, and Argo Workflows - and <strong>NUMO SDLC</strong> - an AI delivery automation platform at <strong>First Abu Dhabi Bank (FAB, UAE)</strong> that automates BRD authoring, Jira story generation, and BDD test creation.</p>
-        <p>I'm available for freelance engagements - cloud architecture, Kubernetes migrations, AI/RAG platforms, DevSecOps pipelines, and MLOps builds.</p>
+    <div class="impact-stats">
+      <div class="impact-stat">
+        <div class="impact-stat-num">99.99%</div>
+        <div class="impact-stat-label">Availability</div>
       </div>
-      <div class="about-stats">
-        <div class="about-stat">
-          <div class="about-stat-num">7+</div>
-          <div class="about-stat-label">Years Experience</div>
-        </div>
-        <div class="about-stat">
-          <div class="about-stat-num">750+</div>
-          <div class="about-stat-label">Servers Managed</div>
-        </div>
-        <div class="about-stat">
-          <div class="about-stat-num">99.99%</div>
-          <div class="about-stat-label">Uptime Delivered</div>
-        </div>
-        <div class="about-stat">
-          <div class="about-stat-num">100+</div>
-          <div class="about-stat-label">CI/CD Pipelines</div>
-        </div>
+      <div class="impact-stat">
+        <div class="impact-stat-num">750+</div>
+        <div class="impact-stat-label">Linux Servers</div>
       </div>
+      <div class="impact-stat">
+        <div class="impact-stat-num">100+</div>
+        <div class="impact-stat-label">CI/CD Pipelines</div>
+      </div>
+      <div class="impact-stat">
+        <div class="impact-stat-num">2</div>
+        <div class="impact-stat-label">Enterprise AI Platforms</div>
+      </div>
+    </div>
+    <div class="impact-text">
+      <p>Lead AI Platform & MLOps Engineer with <strong>7+ years</strong> shipping production infrastructure on <strong>AWS and Azure</strong> for regulated banking, fintech, and enterprise SaaS. Built and shipped <strong>TRecos</strong> (real-time recommendation engine) and <strong>NUMO SDLC</strong> (AI delivery platform for First Abu Dhabi Bank) - both on AKS with Azure OpenAI, pgvector RAG, and full DevSecOps CI/CD.</p>
     </div>
   </div>
 </section>
@@ -769,82 +991,147 @@
     <div class="projects-label">Enterprise AI Platforms</div>
     <div class="projects-featured">
 
-      <a href="https://github.com/abdusirshad/halo-platform-showcase" target="_blank" class="project-card featured">
-        <span class="project-badge">Production</span>
-        <div class="project-arch">
-          <svg viewBox="0 0 400 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" y="25" width="70" height="30" rx="6" stroke="#3B82F6" stroke-width="1" opacity="0.6"/><text x="35" y="44" text-anchor="middle" fill="#A1A1AA" font-size="8" font-family="Inter">User Request</text>
-            <path d="M70 40 L95 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
-            <rect x="95" y="25" width="65" height="30" rx="6" stroke="#3B82F6" stroke-width="1.2"/><text x="127" y="44" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter" font-weight="600">FastAPI</text>
-            <path d="M160 40 L185 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
-            <rect x="185" y="25" width="70" height="30" rx="6" stroke="#3B82F6" stroke-width="1.2"/><text x="220" y="38" text-anchor="middle" fill="#fff" font-size="7" font-family="Inter" font-weight="600">Azure OpenAI</text><text x="220" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">gpt-4o</text>
-            <path d="M255 40 L280 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
-            <rect x="280" y="25" width="55" height="30" rx="6" stroke="#3B82F6" stroke-width="1" opacity="0.8"/><text x="307" y="38" text-anchor="middle" fill="#A1A1AA" font-size="7" font-family="Inter">pgvector</text><text x="307" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">1536-dim</text>
-            <path d="M335 40 L360 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
-            <rect x="360" y="25" width="38" height="30" rx="6" stroke="#3B82F6" stroke-width="1" opacity="0.6"/><text x="379" y="44" text-anchor="middle" fill="#A1A1AA" font-size="7" font-family="Inter">GPU</text>
-            <rect x="95" y="0" width="160" height="14" rx="4" fill="rgba(59,130,246,0.08)"/><text x="175" y="10" text-anchor="middle" fill="#3B82F6" font-size="6.5" font-family="Inter" font-weight="600">AKS + Argo Workflows</text>
-            <rect x="95" y="66" width="160" height="14" rx="4" fill="rgba(59,130,246,0.05)"/><text x="175" y="76" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">Trivy > ACR > Helm > AKS</text>
-          </svg>
+      <a href="https://github.com/abdusirshad/halo-platform-showcase" target="_blank" rel="noopener noreferrer" class="project-card featured">
+        <span class="project-badge">IN PRODUCTION</span>
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">trecos.siriusai.io/architecture</div>
+          </div>
+          <div class="browser-body">
+            <svg viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="95" y="0" width="210" height="16" rx="5" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.15)" stroke-width="0.5"/><text x="200" y="11" text-anchor="middle" fill="#3B82F6" font-size="7" font-family="Inter" font-weight="600">AKS Cluster + Argo Workflows Orchestration</text>
+              <rect x="0" y="30" width="72" height="36" rx="7" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="rgba(255,255,255,0.02)"/><text x="36" y="46" text-anchor="middle" fill="#A1A1AA" font-size="7.5" font-family="Inter">User</text><text x="36" y="58" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">Request</text>
+              <path d="M72 48 L100 48" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4 2"/>
+              <rect x="100" y="30" width="68" height="36" rx="7" stroke="#3B82F6" stroke-width="1.2" fill="rgba(59,130,246,0.04)"/><text x="134" y="52" text-anchor="middle" fill="#fff" font-size="8.5" font-family="Inter" font-weight="600">FastAPI</text>
+              <path d="M168 48 L198 48" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4 2"/>
+              <rect x="198" y="30" width="80" height="36" rx="7" stroke="#3B82F6" stroke-width="1.2" fill="rgba(59,130,246,0.04)"/><text x="238" y="44" text-anchor="middle" fill="#fff" font-size="7.5" font-family="Inter" font-weight="600">Azure OpenAI</text><text x="238" y="57" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">gpt-4o inference</text>
+              <path d="M278 48 L308 48" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4 2"/>
+              <rect x="308" y="30" width="60" height="36" rx="7" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="rgba(255,255,255,0.02)"/><text x="338" y="44" text-anchor="middle" fill="#A1A1AA" font-size="7.5" font-family="Inter">pgvector</text><text x="338" y="57" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">1536-dim RAG</text>
+              <rect x="370" y="33" width="28" height="30" rx="6" stroke="rgba(52,211,153,0.5)" stroke-width="1" fill="rgba(52,211,153,0.05)"/><text x="384" y="51" text-anchor="middle" fill="#34d399" font-size="7" font-family="Inter" font-weight="600">GPU</text>
+              <path d="M368 48 L370 48" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+              <rect x="100" y="78" width="268" height="18" rx="5" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/><text x="234" y="90" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">CI/CD: Trivy scan (zero-vuln gate) → ACR push → Helm upgrade → AKS deploy</text>
+            </svg>
+          </div>
         </div>
         <h3>TRecos - Real-Time Recommendation Engine</h3>
-        <p>Production AKS platform delivering real-time AI recommendations. GPU node pools for model inference, Argo Workflows for training orchestration, Azure OpenAI + pgvector RAG pipeline, and full DevSecOps CI/CD - deployed for enterprise banking.</p>
-        <div class="project-metrics">
-          <span class="project-metric">Sub-second latency</span>
-          <span class="project-metric">99.9% uptime</span>
-          <span class="project-metric">Model-to-prod &lt;3 days</span>
+        <div class="project-case">
+          <div class="project-case-row">
+            <span class="project-case-label">Problem</span>
+            <div class="project-case-content">Enterprise banking teams needed real-time AI recommendations with low latency, governed deployment paths, and production observability.</div>
+          </div>
+          <div class="project-case-row">
+            <span class="project-case-label">Solution</span>
+            <div class="project-case-content">
+              <div class="project-tags">
+                <span class="project-tag">AKS + GPU</span>
+                <span class="project-tag">Azure OpenAI</span>
+                <span class="project-tag">pgvector RAG</span>
+                <span class="project-tag">Argo Workflows</span>
+                <span class="project-tag">FastAPI</span>
+                <span class="project-tag">Helm</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-case-row">
+            <span class="project-case-label">Impact</span>
+            <div class="project-case-content">
+              <div class="project-metrics">
+                <span class="project-metric">Sub-second latency</span>
+                <span class="project-metric">99.9% uptime</span>
+                <span class="project-metric">Model-to-prod &lt;3 days</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="project-tags">
-          <span class="project-tag">Azure OpenAI</span>
-          <span class="project-tag">AKS + GPU</span>
-          <span class="project-tag">pgvector RAG</span>
-          <span class="project-tag">Argo Workflows</span>
-          <span class="project-tag">FastAPI</span>
-          <span class="project-tag">Helm</span>
-        </div>
-        <span class="project-link">View on GitHub &rarr;</span>
+        <span class="project-link">View Repository</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/numo-sdlc-platform-showcase" target="_blank" class="project-card featured">
-        <span class="project-badge">Production</span>
-        <div class="project-arch">
-          <svg viewBox="0 0 400 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" y="25" width="55" height="30" rx="6" stroke="#3B82F6" stroke-width="1.2"/><text x="27" y="38" text-anchor="middle" fill="#fff" font-size="7.5" font-family="Inter" font-weight="600">React</text><text x="27" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">MSAL SSO</text>
-            <path d="M55 40 L80 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
-            <rect x="80" y="25" width="65" height="30" rx="6" stroke="#3B82F6" stroke-width="1.2"/><text x="112" y="38" text-anchor="middle" fill="#fff" font-size="7.5" font-family="Inter" font-weight="600">FastAPI</text><text x="112" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">6 modules</text>
-            <path d="M145 40 L170 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
-            <rect x="170" y="25" width="70" height="30" rx="6" stroke="#3B82F6" stroke-width="1.2"/><text x="205" y="38" text-anchor="middle" fill="#fff" font-size="7" font-family="Inter" font-weight="600">Azure OpenAI</text><text x="205" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">RAG + SSE</text>
-            <path d="M240 33 L265 20" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.4"/>
-            <path d="M240 47 L265 60" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.4"/>
-            <rect x="265" y="8" width="55" height="24" rx="5" stroke="#3B82F6" stroke-width="0.8" opacity="0.6"/><text x="292" y="23" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">Jira OAuth</text>
-            <rect x="265" y="48" width="65" height="24" rx="5" stroke="#3B82F6" stroke-width="0.8" opacity="0.6"/><text x="297" y="63" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">Confluence</text>
-            <rect x="340" y="25" width="58" height="30" rx="6" stroke="#3B82F6" stroke-width="0.8" opacity="0.5"/><text x="369" y="38" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">Cosmos DB</text><text x="369" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">pgvector</text>
-            <path d="M240 40 L340 40" stroke="#3B82F6" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.3"/>
-          </svg>
+      <a href="https://github.com/abdusirshad/numo-sdlc-platform-showcase" target="_blank" rel="noopener noreferrer" class="project-card featured">
+        <span class="project-badge">IN PRODUCTION</span>
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">numo.fab.ae/platform</div>
+          </div>
+          <div class="browser-body">
+            <svg viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="32" width="58" height="36" rx="7" stroke="#3B82F6" stroke-width="1.2" fill="rgba(59,130,246,0.04)"/><text x="29" y="46" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter" font-weight="600">React</text><text x="29" y="58" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">MSAL SSO</text>
+              <path d="M58 50 L86 50" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4 2"/>
+              <rect x="86" y="32" width="68" height="36" rx="7" stroke="#3B82F6" stroke-width="1.2" fill="rgba(59,130,246,0.04)"/><text x="120" y="46" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter" font-weight="600">FastAPI</text><text x="120" y="58" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">6 RBAC modules</text>
+              <path d="M154 50 L184 50" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4 2"/>
+              <rect x="184" y="32" width="76" height="36" rx="7" stroke="#3B82F6" stroke-width="1.2" fill="rgba(59,130,246,0.04)"/><text x="222" y="46" text-anchor="middle" fill="#fff" font-size="7.5" font-family="Inter" font-weight="600">Azure OpenAI</text><text x="222" y="58" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">RAG + SSE stream</text>
+              <path d="M260 42 L290 24" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" stroke-dasharray="3 2"/>
+              <path d="M260 58 L290 76" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" stroke-dasharray="3 2"/>
+              <rect x="290" y="10" width="58" height="26" rx="6" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="rgba(255,255,255,0.02)"/><text x="319" y="27" text-anchor="middle" fill="#A1A1AA" font-size="7" font-family="Inter">Jira OAuth</text>
+              <rect x="290" y="64" width="68" height="26" rx="6" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="rgba(255,255,255,0.02)"/><text x="324" y="81" text-anchor="middle" fill="#A1A1AA" font-size="7" font-family="Inter">Confluence</text>
+              <path d="M260 50 L360 50" stroke="rgba(255,255,255,0.1)" stroke-width="0.8" stroke-dasharray="3 2"/>
+              <rect x="360" y="32" width="38" height="36" rx="7" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="rgba(255,255,255,0.02)"/><text x="379" y="46" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">Cosmos</text><text x="379" y="57" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">pgvector</text>
+              <rect x="0" y="0" width="400" height="16" rx="5" fill="rgba(59,130,246,0.04)" stroke="rgba(59,130,246,0.1)" stroke-width="0.5"/><text x="200" y="11" text-anchor="middle" fill="#3B82F6" font-size="6.5" font-family="Inter" font-weight="600">AKS + Langfuse Observability + Azure AD Multi-Tenant</text>
+            </svg>
+          </div>
         </div>
         <h3>NUMO - AI-Powered SDLC Automation</h3>
-        <p>AI delivery platform at First Abu Dhabi Bank (FAB, UAE) automating BRD authoring, Jira story generation, Confluence documentation, and BDD test creation via RAG pipelines. Azure AD RBAC across 6 modules, Langfuse LLM tracing.</p>
-        <div class="project-metrics">
-          <span class="project-metric">3-5 days to 4 hrs</span>
-          <span class="project-metric">6 modules</span>
-          <span class="project-metric">FAB UAE (enterprise)</span>
+        <div class="project-case">
+          <div class="project-case-row">
+            <span class="project-case-label">Problem</span>
+            <div class="project-case-content">FAB needed faster SDLC artifact generation without losing Azure AD governance, auditability, or integration with Jira and Confluence.</div>
+          </div>
+          <div class="project-case-row">
+            <span class="project-case-label">Solution</span>
+            <div class="project-case-content">
+              <div class="project-tags">
+                <span class="project-tag">Azure OpenAI gpt-4o</span>
+                <span class="project-tag">RAG pgvector</span>
+                <span class="project-tag">FastAPI AKS</span>
+                <span class="project-tag">Jira Confluence</span>
+                <span class="project-tag">Azure AD RBAC</span>
+                <span class="project-tag">React 18</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-case-row">
+            <span class="project-case-label">Impact</span>
+            <div class="project-case-content">
+              <div class="project-metrics">
+                <span class="project-metric">3-5 days to 4 hrs</span>
+                <span class="project-metric">6 modules</span>
+                <span class="project-metric">FAB UAE enterprise</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="project-tags">
-          <span class="project-tag">Azure OpenAI gpt-4o</span>
-          <span class="project-tag">RAG pgvector</span>
-          <span class="project-tag">FastAPI AKS</span>
-          <span class="project-tag">Jira Confluence</span>
-          <span class="project-tag">Azure AD RBAC</span>
-          <span class="project-tag">React 18</span>
-        </div>
-        <span class="project-link">View on GitHub &rarr;</span>
+        <span class="project-link">View Repository</span>
       </a>
 
+    </div>
+
+    <div class="case-study reveal">
+      <span class="projects-label">Architecture Decision Case Study</span>
+      <div class="case-study-header">
+        <h3>TRecos: production RAG on AKS without adding search-stack sprawl.</h3>
+        <p>For the recommendation platform, the important decision was keeping inference, retrieval, deployment, and observability close enough to operate as one production system while still leaving room for model iteration.</p>
+      </div>
+      <div class="case-study-grid">
+        <div class="case-study-panel">
+          <span>Challenge</span>
+          <p>Ship low-latency AI recommendations inside a regulated environment with GPU workloads, traceable prompts, repeatable releases, and minimal operational surface area.</p>
+        </div>
+        <div class="case-study-panel">
+          <span>Tradeoff</span>
+          <p>Used AKS, Azure OpenAI, and pgvector instead of a separate managed vector/search tier, reducing moving parts while keeping retrieval tunable through database-level controls.</p>
+        </div>
+        <div class="case-study-panel">
+          <span>Result</span>
+          <p>Sub-second recommendations, model-to-production cycles under three days, CI security gates, and platform observability through Langfuse, Azure Monitor, and Grafana.</p>
+        </div>
+      </div>
     </div>
 
     <div class="projects-label">Open Source Portfolio</div>
     <div class="projects-grid">
 
-      <a href="https://github.com/abdusirshad/terraform-multicloud-hub-spoke" target="_blank" class="project-card">
+      <a href="https://github.com/abdusirshad/terraform-multicloud-hub-spoke" target="_blank" rel="noopener noreferrer" class="project-card">
         <h3>Multi-Cloud Hub-and-Spoke IaC</h3>
         <p>A reusable Terraform module library for multi-cloud (Azure + AWS) hub-and-spoke networking with AKS - validate-clean modules, an example root, and fmt/validate/tflint CI.</p>
         <div class="project-tags">
@@ -854,10 +1141,10 @@
           <span class="project-tag">AKS</span>
           <span class="project-tag">Azure DevOps</span>
         </div>
-        <span class="project-link">View on GitHub &rarr;</span>
+        <span class="project-link">View Repository</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/gitops-cicd-platform" target="_blank" class="project-card">
+      <a href="https://github.com/abdusirshad/gitops-cicd-platform" target="_blank" rel="noopener noreferrer" class="project-card">
         <h3>Production GitOps CI/CD Platform</h3>
         <p>GitHub Actions → GHCR → Argo CD App-of-Apps → Kustomize overlays with Argo Rollouts canary + analysis, kube-prometheus-stack, and k6 load tests. Runs end-to-end on kind.</p>
         <div class="project-tags">
@@ -867,10 +1154,10 @@
           <span class="project-tag">Kubernetes</span>
           <span class="project-tag">GitHub Actions</span>
         </div>
-        <span class="project-link">View on GitHub &rarr;</span>
+        <span class="project-link">View Repository</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/devsecops-pipeline" target="_blank" class="project-card">
+      <a href="https://github.com/abdusirshad/devsecops-pipeline" target="_blank" rel="noopener noreferrer" class="project-card">
         <h3>DevSecOps Pipeline</h3>
         <p>A 9-stage security pipeline - Gitleaks, Semgrep, Hadolint, Trivy, Checkov, OPA/Conftest, Syft SBOM, and keyless cosign signing - scanning a real sample app. Green on a public fork.</p>
         <div class="project-tags">
@@ -880,10 +1167,10 @@
           <span class="project-tag">OPA</span>
           <span class="project-tag">Cosign</span>
         </div>
-        <span class="project-link">View on GitHub &rarr;</span>
+        <span class="project-link">View Repository</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/mlops-platform-k8s" target="_blank" class="project-card">
+      <a href="https://github.com/abdusirshad/mlops-platform-k8s" target="_blank" rel="noopener noreferrer" class="project-card">
         <h3>MLOps Platform on Kubernetes</h3>
         <p>End-to-end MLOps: train → MLflow registry with an accuracy gate → FastAPI serving on Kubernetes, plus Prometheus/Grafana model-serving observability. Runs via Docker Compose or kind.</p>
         <div class="project-tags">
@@ -893,10 +1180,10 @@
           <span class="project-tag">Prometheus</span>
           <span class="project-tag">MLOps</span>
         </div>
-        <span class="project-link">View on GitHub &rarr;</span>
+        <span class="project-link">View Repository</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/observability-stack" target="_blank" class="project-card">
+      <a href="https://github.com/abdusirshad/observability-stack" target="_blank" rel="noopener noreferrer" class="project-card">
         <h3>Observability Stack</h3>
         <p>One-command Prometheus + Grafana + Alertmanager stack with multi-window burn-rate SLO alerts and auto-provisioned RED/SLO dashboards over an instrumented sample app.</p>
         <div class="project-tags">
@@ -906,10 +1193,10 @@
           <span class="project-tag">SLO</span>
           <span class="project-tag">SRE</span>
         </div>
-        <span class="project-link">View on GitHub &rarr;</span>
+        <span class="project-link">View Repository</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/rag-knowledge-search" target="_blank" class="project-card">
+      <a href="https://github.com/abdusirshad/rag-knowledge-search" target="_blank" rel="noopener noreferrer" class="project-card">
         <h3>RAG Knowledge Search</h3>
         <p>Reference Retrieval-Augmented Generation platform: FastAPI + hybrid retrieval (FAISS dense + BM25 sparse) + reranking with citations. Runs offline with an extractive fallback; OpenAI/Pinecone optional.</p>
         <div class="project-tags">
@@ -919,10 +1206,10 @@
           <span class="project-tag">FastAPI</span>
           <span class="project-tag">Python</span>
         </div>
-        <span class="project-link">View on GitHub &rarr;</span>
+        <span class="project-link">View Repository</span>
       </a>
 
-      <a href="https://github.com/abdusirshad/cicd-pipeline-templates" target="_blank" class="project-card">
+      <a href="https://github.com/abdusirshad/cicd-pipeline-templates" target="_blank" rel="noopener noreferrer" class="project-card">
         <h3>Reusable CI/CD Templates</h3>
         <p>A reusable CI/CD template library - GitHub Actions reusable workflows + GitLab CI templates + a Jenkins shared library - demonstrated end-to-end on a bundled sample app with security gates.</p>
         <div class="project-tags">
@@ -932,7 +1219,7 @@
           <span class="project-tag">Reusable Workflows</span>
           <span class="project-tag">Trivy</span>
         </div>
-        <span class="project-link">View on GitHub &rarr;</span>
+        <span class="project-link">View Repository</span>
       </a>
 
     </div>
@@ -946,58 +1233,58 @@
     <h2>Tools I work with.</h2>
     <p class="section-desc">Production-tested technologies across cloud, containers, CI/CD, and AI infrastructure.</p>
     <div class="skills-grid">
-      <div class="skill-row">
-        <div class="skill-cat">AWS</div>
-        <div class="skill-tags">
-          <span class="tag highlight">EKS</span><span class="tag highlight">EC2</span><span class="tag highlight">S3 + KMS</span><span class="tag highlight">IAM</span><span class="tag highlight">RDS / Aurora</span><span class="tag highlight">Bedrock</span><span class="tag">Lambda</span><span class="tag">CloudFormation</span><span class="tag">CloudWatch</span><span class="tag">Route 53</span><span class="tag">VPC</span><span class="tag">Auto Scaling</span><span class="tag">SSM</span>
+      <div class="skill-card">
+        <div class="skill-card-title">AWS</div>
+        <div class="skill-card-items">
+          <span>EKS</span><span>EC2</span><span>S3 + KMS</span><span>IAM</span><span>RDS / Aurora</span><span>Bedrock</span><span class="dim">Lambda</span><span class="dim">CloudFormation</span><span class="dim">Route 53</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-cat">Azure</div>
-        <div class="skill-tags">
-          <span class="tag highlight">AKS</span><span class="tag highlight">Azure OpenAI</span><span class="tag highlight">Entra ID / MSAL</span><span class="tag highlight">Key Vault</span><span class="tag highlight">ACR</span><span class="tag highlight">Azure DevOps</span><span class="tag">Cosmos DB</span><span class="tag">Blob Storage</span><span class="tag">App Gateway</span><span class="tag">VNet / NSG</span><span class="tag">Azure Monitor</span>
+      <div class="skill-card">
+        <div class="skill-card-title">Azure</div>
+        <div class="skill-card-items">
+          <span>AKS</span><span>Azure OpenAI</span><span>Entra ID / MSAL</span><span>Key Vault</span><span>ACR</span><span>Azure DevOps</span><span class="dim">Cosmos DB</span><span class="dim">Blob Storage</span><span class="dim">App Gateway</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-cat">Kubernetes</div>
-        <div class="skill-tags">
-          <span class="tag highlight">Kubernetes</span><span class="tag highlight">Helm</span><span class="tag highlight">Argo CD</span><span class="tag highlight">Argo Workflows</span><span class="tag highlight">Argo Rollouts</span><span class="tag">kustomize</span><span class="tag">Docker</span><span class="tag">Karpenter</span><span class="tag">HPA</span><span class="tag">NetworkPolicy</span>
+      <div class="skill-card">
+        <div class="skill-card-title">Kubernetes</div>
+        <div class="skill-card-items">
+          <span>Kubernetes</span><span>Helm</span><span>Argo CD</span><span>Argo Workflows</span><span>Argo Rollouts</span><span class="dim">Docker</span><span class="dim">Karpenter</span><span class="dim">kustomize</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-cat">IaC</div>
-        <div class="skill-tags">
-          <span class="tag highlight">Terraform</span><span class="tag highlight">Terraform Modules</span><span class="tag">CloudFormation</span><span class="tag">ARM Templates</span><span class="tag">Ansible</span>
+      <div class="skill-card">
+        <div class="skill-card-title">IaC</div>
+        <div class="skill-card-items">
+          <span>Terraform</span><span>Terraform Modules</span><span class="dim">CloudFormation</span><span class="dim">ARM Templates</span><span class="dim">Ansible</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-cat">CI/CD</div>
-        <div class="skill-tags">
-          <span class="tag highlight">Azure DevOps Pipelines</span><span class="tag highlight">GitHub Actions</span><span class="tag highlight">GitLab CI</span><span class="tag highlight">Jenkins</span><span class="tag">cosign / Sigstore</span><span class="tag">Trivy</span><span class="tag">SBOM / Syft</span>
+      <div class="skill-card">
+        <div class="skill-card-title">CI/CD</div>
+        <div class="skill-card-items">
+          <span>Azure DevOps</span><span>GitHub Actions</span><span>GitLab CI</span><span>Jenkins</span><span class="dim">cosign / Sigstore</span><span class="dim">Trivy</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-cat">AI & RAG</div>
-        <div class="skill-tags">
-          <span class="tag highlight">Azure OpenAI (gpt-4o)</span><span class="tag highlight">pgvector</span><span class="tag highlight">RAG pipelines</span><span class="tag highlight">Langfuse</span><span class="tag highlight">MLflow</span><span class="tag">FAISS</span><span class="tag">Pinecone</span><span class="tag">AWS Bedrock</span><span class="tag">text-embedding-3-small</span>
+      <div class="skill-card">
+        <div class="skill-card-title">AI & RAG</div>
+        <div class="skill-card-items">
+          <span>Azure OpenAI (gpt-4o)</span><span>pgvector</span><span>RAG pipelines</span><span>Langfuse</span><span>MLflow</span><span class="dim">FAISS</span><span class="dim">AWS Bedrock</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-cat">Observability</div>
-        <div class="skill-tags">
-          <span class="tag highlight">Prometheus</span><span class="tag highlight">Grafana</span><span class="tag highlight">Alertmanager</span><span class="tag highlight">SLO / SLI</span><span class="tag">Sentry</span><span class="tag">Azure Monitor</span><span class="tag">CloudWatch</span><span class="tag">PagerDuty</span><span class="tag">ELK Stack</span>
+      <div class="skill-card">
+        <div class="skill-card-title">Observability</div>
+        <div class="skill-card-items">
+          <span>Prometheus</span><span>Grafana</span><span>Alertmanager</span><span>SLO / SLI</span><span class="dim">PagerDuty</span><span class="dim">ELK Stack</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-cat">Security</div>
-        <div class="skill-tags">
-          <span class="tag highlight">DevSecOps</span><span class="tag highlight">Trivy</span><span class="tag highlight">OPA / Rego</span><span class="tag highlight">Gitleaks</span><span class="tag">Semgrep</span><span class="tag">Hadolint</span><span class="tag">cosign</span><span class="tag">RBAC</span><span class="tag">Zero-Trust</span><span class="tag">SOC 2</span>
+      <div class="skill-card">
+        <div class="skill-card-title">Security</div>
+        <div class="skill-card-items">
+          <span>DevSecOps</span><span>Trivy</span><span>OPA / Rego</span><span>Gitleaks</span><span class="dim">Semgrep</span><span class="dim">RBAC</span><span class="dim">SOC 2</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-cat">Languages</div>
-        <div class="skill-tags">
-          <span class="tag highlight">Python 3.12</span><span class="tag highlight">Bash / Shell</span><span class="tag highlight">TypeScript</span><span class="tag">HCL</span><span class="tag">Groovy</span><span class="tag">YAML</span><span class="tag">SQL</span>
+      <div class="skill-card">
+        <div class="skill-card-title">Languages</div>
+        <div class="skill-card-items">
+          <span>Python 3.12</span><span>Bash / Shell</span><span>TypeScript</span><span class="dim">HCL</span><span class="dim">Groovy</span><span class="dim">YAML</span>
         </div>
       </div>
     </div>
@@ -1011,28 +1298,25 @@
     <h2>Credentials.</h2>
     <div class="certs-grid">
       <div class="cert-card">
-        <div class="cert-icon">&#9784;</div>
         <div class="cert-info">
           <h4>Certified Kubernetes Administrator</h4>
           <p>Linux Foundation / CNCF - CKA</p>
         </div>
-        <span class="cert-badge">Active</span>
+        <span class="cert-badge">2025</span>
       </div>
       <div class="cert-card">
-        <div class="cert-icon">&#9729;</div>
         <div class="cert-info">
           <h4>Azure Administrator Associate</h4>
           <p>Microsoft - AZ-104</p>
         </div>
-        <span class="cert-badge">Active</span>
+        <span class="cert-badge">2025</span>
       </div>
       <div class="cert-card">
-        <div class="cert-icon">&#9670;</div>
         <div class="cert-info">
           <h4>Azure Fundamentals</h4>
           <p>Microsoft - AZ-900</p>
         </div>
-        <span class="cert-badge">Active</span>
+        <span class="cert-badge">2025</span>
       </div>
     </div>
   </div>
@@ -1043,7 +1327,7 @@
   <div class="section-inner reveal">
     <span class="section-label">Services</span>
     <h2>Freelance & Consulting</h2>
-    <div class="avail-badge"><span></span> Available for new projects</div>
+    <div class="avail-badge"><span></span> Currently accepting new engagements</div>
     <p class="section-desc">I take on freelance engagements for startups and enterprises needing senior-level Cloud & AI platform expertise - remotely from India, aligned to UAE / UK / US timezones.</p>
     <div class="freelance-grid">
       <div class="freelance-card">
@@ -1077,9 +1361,8 @@
 <!-- ── CONTACT ── -->
 <section id="contact">
   <div class="section-inner contact-inner reveal">
-    <span class="section-label">Contact</span>
-    <h2>Let's build reliable infrastructure together.</h2>
-    <p class="section-desc" style="margin-left:auto;margin-right:auto;">Open to Senior DevOps / Cloud / MLOps roles and available for freelance projects globally. Feel free to reach out.</p>
+    <h2>Let's Build Reliable<br>Infrastructure Together.</h2>
+    <p class="section-desc" style="margin-left:auto;margin-right:auto;">Open to Senior DevOps / Cloud / MLOps roles and available for freelance projects globally.</p>
     <div class="contact-links">
       <a href="tel:+919097421696" class="contact-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6.08 6.08l1.09-1.09a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1089,11 +1372,11 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         abdusirshad@gmail.com
       </a>
-      <a href="https://linkedin.com/in/md-irshad-devops/" target="_blank" class="contact-link">
+      <a href="https://linkedin.com/in/md-irshad-devops/" target="_blank" rel="noopener noreferrer" class="contact-link">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         LinkedIn
       </a>
-      <a href="https://github.com/abdusirshad" target="_blank" class="contact-link">
+      <a href="https://github.com/abdusirshad" target="_blank" rel="noopener noreferrer" class="contact-link">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         GitHub
       </a>
@@ -1102,7 +1385,14 @@
 </section>
 
 <footer>
-  <p>Built by Md. Irshad &middot; <a href="https://github.com/abdusirshad/portfolio" target="_blank">github.com/abdusirshad/portfolio</a></p>
+  <div class="footer-meta">
+    <span>India</span>
+    <span class="footer-sep"></span>
+    <span>Remote: UAE / Europe / UK / US</span>
+    <span class="footer-sep"></span>
+    <span>Replies within 24 hours</span>
+  </div>
+  <p>Built by Md. Irshad &middot; <a href="https://github.com/abdusirshad/portfolio" target="_blank" rel="noopener noreferrer">github.com/abdusirshad/portfolio</a></p>
 </footer>
 
 <script>
@@ -1112,33 +1402,59 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Hamburger
-  function toggleMenu() {
-    const links = document.querySelector('.nav-links');
-    const isOpen = links.style.display === 'flex';
-    links.style.display = isOpen ? 'none' : 'flex';
-    if (!isOpen) {
-      links.style.flexDirection = 'column';
-      links.style.position = 'absolute';
-      links.style.top = '72px';
-      links.style.left = '0'; links.style.right = '0';
-      links.style.background = 'rgba(5,5,5,0.98)';
-      links.style.padding = '1.5rem clamp(1.5rem, 5vw, 4rem)';
-      links.style.borderBottom = '1px solid var(--border)';
-      links.style.backdropFilter = 'blur(20px)';
-      links.style.gap = '1.5rem';
-    }
+  // Staggered card reveals
+  const cardObserver = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        cardObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.project-card, .skill-card, .freelance-card, .timeline-card').forEach(el => {
+    el.classList.add('reveal-card');
+    cardObserver.observe(el);
+  });
+
+  // Mobile menu
+  const navLinks = document.querySelector('.nav-links');
+  const menuToggle = document.querySelector('#menu-toggle');
+
+  function setMenuOpen(isOpen) {
+    navLinks.classList.toggle('open', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
   }
 
-  // Active nav on scroll
+  menuToggle.addEventListener('click', () => {
+    setMenuOpen(!navLinks.classList.contains('open'));
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => setMenuOpen(false));
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) setMenuOpen(false);
+  });
+
+  // Progress and active nav on scroll
   const sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', () => {
+  const progressBar = document.querySelector('.page-progress span');
+
+  function updatePageState() {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+    progressBar.style.transform = `scaleX(${progress})`;
+
     let current = '';
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
     document.querySelectorAll('.nav-links a').forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
-  });
+  }
+
+  window.addEventListener('scroll', updatePageState, { passive: true });
+  updatePageState();
 </script>
 </body>
 </html>
