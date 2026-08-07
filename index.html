@@ -148,19 +148,19 @@
     }
     .btn-primary {
       padding: 0.75rem 2rem; border-radius: 10px;
-      background: var(--accent); color: #fff; font-weight: 600; font-size: 0.875rem;
+      background: #fff; color: #050505; font-weight: 600; font-size: 0.875rem;
       text-decoration: none; transition: background 0.3s, transform 0.2s;
       letter-spacing: -0.01em;
     }
-    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-primary:hover { background: #e4e4e7; transform: translateY(-2px); }
     .btn-outline {
       padding: 0.75rem 2rem; border-radius: 10px;
-      border: 1px solid var(--border); background: transparent;
+      border: 1px solid rgba(255,255,255,0.15); background: transparent;
       color: var(--text); font-weight: 600; font-size: 0.875rem;
       text-decoration: none; transition: border-color 0.3s, background 0.3s;
       letter-spacing: -0.01em;
     }
-    .btn-outline:hover { border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.05); }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.04); }
 
     /* ── SECTIONS ── */
     section { padding: clamp(80px, 12vw, 140px) clamp(1.5rem, 5vw, 4rem); }
@@ -254,24 +254,43 @@
     }
     .exp-header {
       display: flex; justify-content: space-between; align-items: flex-start;
-      flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;
+      flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.25rem;
     }
     .exp-company {
-      font-size: 1.25rem; font-weight: 700; color: var(--text);
-      letter-spacing: -0.02em;
+      font-size: 1.35rem; font-weight: 800; color: var(--text);
+      letter-spacing: -0.03em;
     }
-    .exp-company span { color: var(--muted); font-weight: 400; font-size: 0.9rem; }
+    .exp-company span { color: var(--muted); font-weight: 400; font-size: 0.85rem; }
     .exp-date {
-      font-size: 0.8rem; color: var(--muted); font-weight: 500;
+      font-size: 0.78rem; color: var(--muted); font-weight: 500;
       font-family: 'JetBrains Mono', monospace;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
     }
     .exp-role {
       font-size: 0.9rem; color: var(--accent); font-weight: 600;
       margin-bottom: 1.25rem;
     }
-    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .exp-metrics {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      margin-bottom: 1.5rem; padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-metric {
+      display: flex; flex-direction: column;
+    }
+    .exp-metric-num {
+      font-size: 1.5rem; font-weight: 800; color: var(--text);
+      letter-spacing: -0.03em; line-height: 1;
+    }
+    .exp-metric-label {
+      font-size: 0.7rem; color: var(--muted); font-weight: 500;
+      margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
     .exp-bullets li {
-      font-size: 0.9rem; color: var(--muted); padding-left: 1.25rem;
+      font-size: 0.85rem; color: var(--muted); padding-left: 1.25rem;
       position: relative; line-height: 1.7;
     }
     .exp-bullets li::before {
@@ -282,9 +301,20 @@
     }
     .exp-bullets li strong { color: var(--text); font-weight: 600; }
     .exp-bullets li code {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
       background: rgba(59,130,246,0.1); padding: 0.1rem 0.4rem;
       border-radius: 4px; color: var(--accent);
+    }
+    .exp-tech {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 1.25rem; padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .exp-tech-tag {
+      padding: 0.25rem 0.6rem; border-radius: 5px;
+      font-size: 0.7rem; font-weight: 500;
+      background: rgba(59,130,246,0.06); color: var(--accent);
+      border: 1px solid rgba(59,130,246,0.12);
     }
 
     /* ── PROJECTS ── */
@@ -327,6 +357,25 @@
       background: rgba(59,130,246,0.15); color: var(--accent);
       letter-spacing: 0.05em; margin-bottom: 1rem;
       text-transform: uppercase;
+    }
+    .project-arch {
+      margin-bottom: 1.25rem;
+      padding: 1.25rem 1rem;
+      background: rgba(59,130,246,0.02);
+      border: 1px solid rgba(59,130,246,0.08);
+      border-radius: 12px;
+    }
+    .project-arch svg { width: 100%; height: auto; }
+    .project-metrics {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .project-metric {
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--text); padding: 0.3rem 0.7rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
     }
     .project-card h3 {
       font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;
@@ -566,7 +615,7 @@
   <div class="hero-glow"></div>
   <div class="hero-content">
     <h1>Building AI Infrastructure<br>that scales.</h1>
-    <p class="hero-role"><strong>Lead AI Platform & MLOps Engineer</strong> &mdash; 7+ years shipping production infrastructure on AWS & Azure for regulated banking and enterprise SaaS.</p>
+    <p class="hero-role"><strong>Lead AI Platform & MLOps Engineer</strong> - 7+ years shipping production infrastructure on AWS & Azure for regulated banking and enterprise SaaS.</p>
     <div class="hero-techs">
       <span class="hero-tech">AWS</span>
       <span class="hero-tech">Azure</span>
@@ -626,62 +675,84 @@
       <div class="timeline-card">
         <div class="exp-header">
           <div>
-            <div class="exp-company">SiriusAI <span>- Cloud-Native Enterprise AI Platform Company</span></div>
+            <div class="exp-company">SiriusAI <span>- Cloud-Native Enterprise AI</span></div>
             <div class="exp-role">Senior Cloud & AI Platform Engineer</div>
           </div>
           <span class="exp-date">Oct 2025 - Present</span>
         </div>
+        <div class="exp-metrics">
+          <div class="exp-metric"><span class="exp-metric-num">2</span><span class="exp-metric-label">AI Platforms Shipped</span></div>
+          <div class="exp-metric"><span class="exp-metric-num">99.9%</span><span class="exp-metric-label">Pod Availability</span></div>
+          <div class="exp-metric"><span class="exp-metric-num">70%</span><span class="exp-metric-label">Lead Time Reduced</span></div>
+          <div class="exp-metric"><span class="exp-metric-num">0</span><span class="exp-metric-label">Data Loss (Migration)</span></div>
+        </div>
         <ul class="exp-bullets">
-          <li>Designed and deployed <strong>TRecos</strong> real-time recommendation engine on <strong>AKS with NVIDIA GPU node pools</strong> - Argo Workflows for ML training orchestration, Azure OpenAI (gpt-4o + text-embedding-3-small) for inference, and pgvector RAG pipeline with 1536-dim cosine similarity retrieval for banking-grade recommendations.</li>
-          <li>Architected and shipped <strong>NUMO SDLC</strong> AI delivery platform for <strong>First Abu Dhabi Bank (FAB, UAE)</strong> - automating BRD authoring, Jira story generation, Confluence page creation, and BDD .feature file commits to GitHub via FastAPI + Azure OpenAI RAG pipeline on AKS.</li>
-          <li>Implemented <strong>Azure AD group-based RBAC</strong> across 6 NUMO product modules (brd, confluence, jira, design, pair-programming, testing) using MSAL JWT validation and Microsoft Graph API for group overage resolution; integrated Jira and Confluence via <strong>OAuth 2.0</strong>.</li>
-          <li>Built multi-store data architecture for NUMO: <strong>PostgreSQL + pgvector</strong> for structured data and RAG embeddings, <strong>Azure Cosmos DB</strong> (TTL, session_id partition key) for multi-turn BRD chat history, and <strong>Azure Blob Storage</strong> for BRD document persistence - with Langfuse for LLM trace and cost attribution.</li>
-          <li>Built <strong>Azure DevOps CI/CD pipelines</strong> for both platforms: docker build → Trivy scan (HIGH/CRITICAL, exit-code 1) → ACR push → <code>helm upgrade --install</code> on SiriusAI-Solutions-AKS, with environment secrets injected via Helm values and Azure Key Vault at runtime.</li>
-          <li>Provisioned and managed <strong>AKS cluster infrastructure</strong> using Terraform and Helm - namespace isolation (solutions-sdlc, solutions-trecos), App Gateway ingress with TLS termination, ACR integration via managed identity, and Azure Monitor for pod-level observability.</li>
-          <li>Led migration of SiriusAI <strong>Azure infrastructure from India to US tenant</strong> using Terraform, re-architecting VNets, Entra ID, Key Vault, AKS clusters, and ACR with <strong>zero data loss</strong>; rebuilt all Azure DevOps pipelines with policy gates and Trivy scan enforcement.</li>
+          <li>Deployed <strong>TRecos</strong> real-time recommendation engine on <strong>AKS with NVIDIA GPU node pools</strong> - Argo Workflows for ML training, Azure OpenAI (gpt-4o) inference, and pgvector RAG pipeline with 1536-dim cosine retrieval.</li>
+          <li>Shipped <strong>NUMO SDLC</strong> AI delivery platform for <strong>First Abu Dhabi Bank (FAB, UAE)</strong> - automating BRD authoring, Jira story generation, Confluence docs, and BDD test creation via FastAPI + Azure OpenAI RAG on AKS.</li>
+          <li>Implemented <strong>Azure AD RBAC</strong> across 6 product modules using MSAL JWT + Microsoft Graph API; integrated Jira and Confluence via <strong>OAuth 2.0</strong>.</li>
+          <li>Built multi-store architecture: <strong>pgvector</strong> for RAG embeddings, <strong>Cosmos DB</strong> for chat history, <strong>Blob Storage</strong> for documents, <strong>Langfuse</strong> for LLM cost attribution.</li>
+          <li>CI/CD: docker build, Trivy scan (HIGH/CRITICAL gate), ACR push, <code>helm upgrade --install</code> with Azure Key Vault secret injection.</li>
+          <li>Managed <strong>AKS infrastructure</strong> via Terraform/Helm - namespace isolation, App Gateway ingress, TLS, managed identity ACR, Azure Monitor observability.</li>
+          <li>Led <strong>India-to-US tenant migration</strong> - re-architected VNets, Entra ID, Key Vault, AKS, ACR with zero data loss.</li>
         </ul>
+        <div class="exp-tech">
+          <span class="exp-tech-tag">AKS</span><span class="exp-tech-tag">Azure OpenAI</span><span class="exp-tech-tag">pgvector</span><span class="exp-tech-tag">Argo Workflows</span><span class="exp-tech-tag">Terraform</span><span class="exp-tech-tag">Helm</span><span class="exp-tech-tag">Cosmos DB</span><span class="exp-tech-tag">FastAPI</span><span class="exp-tech-tag">Azure DevOps</span><span class="exp-tech-tag">Trivy</span>
+        </div>
       </div>
 
       <div class="timeline-card">
         <div class="exp-header">
           <div>
-            <div class="exp-company">Biz2Credit <span>- SaaS-based Global Fintech Company</span></div>
+            <div class="exp-company">Biz2Credit <span>- Global Fintech SaaS</span></div>
             <div class="exp-role">Senior DevOps Engineer</div>
           </div>
           <span class="exp-date">Oct 2021 - Sep 2025</span>
         </div>
+        <div class="exp-metrics">
+          <div class="exp-metric"><span class="exp-metric-num">750+</span><span class="exp-metric-label">Servers Managed</span></div>
+          <div class="exp-metric"><span class="exp-metric-num">99.99%</span><span class="exp-metric-label">Availability</span></div>
+          <div class="exp-metric"><span class="exp-metric-num">40%</span><span class="exp-metric-label">Cost Reduction</span></div>
+          <div class="exp-metric"><span class="exp-metric-num">10+</span><span class="exp-metric-label">Teams Onboarded</span></div>
+        </div>
         <ul class="exp-bullets">
-          <li>Designed and deployed highly available, scalable <strong>AWS architectures (EC2, RDS, S3, Route 53)</strong>, supporting <strong>24/7 uptime</strong> for critical business applications.</li>
-          <li>Automated infrastructure provisioning using <strong>Terraform and CloudFormation</strong>, reducing manual setup time by <strong>90%</strong> and delivering consistent deployments across environments.</li>
-          <li>Built and maintained <strong>CI/CD pipelines</strong> using Jenkins and GitLab Runners, accelerating software delivery by <strong>40%</strong> through automation and parallel jobs.</li>
-          <li>Managed <strong>750+ Linux servers</strong>, automating patching, performance tuning, and monitoring to maintain <strong>99.99% system availability</strong>.</li>
-          <li>Deployed and operated production-grade <strong>EKS clusters</strong> with reusable Helm charts, ingress configurations, and zero-downtime cluster upgrades across dev, staging, and production.</li>
-          <li>Introduced <strong>Karpenter-based auto-scaling</strong> using spot instances on EKS, cutting compute costs by <strong>30-40%</strong>.</li>
-          <li>Wrote <strong>Python and Shell scripts</strong> to automate EC2 lifecycle management, log rotation, and backup scheduling, improving operational efficiency by <strong>50%</strong>.</li>
-          <li>Implemented robust multi-layered <strong>AWS backup strategies</strong> enabling <strong>60-day point-in-time recovery</strong>; reduced storage spend by <strong>25%</strong> via snapshot lifecycle policies.</li>
-          <li>Led application migration to AWS, cutting deployment time by <strong>70%</strong> and infrastructure provisioning from days to hours.</li>
-          <li>Delivered internal tooling and onboarding for <strong>10+ application teams</strong>, improving CI/CD adoption and reducing release-related incidents by <strong>30%</strong>.</li>
-          <li>Hardened security via mod-proxy on Apache HA web servers and <strong>AWS IAM/Systems Manager/KMS</strong> controls, mitigating <strong>100+ vulnerabilities</strong> and reducing server response time by <strong>15%</strong>.</li>
+          <li>Designed highly available <strong>AWS architectures (EC2, RDS, S3, Route 53)</strong> supporting 24/7 uptime for critical fintech applications.</li>
+          <li>Automated provisioning with <strong>Terraform and CloudFormation</strong> - reduced manual setup by 90%, consistent deployments across environments.</li>
+          <li>Built <strong>CI/CD pipelines</strong> (Jenkins, GitLab Runners) accelerating delivery by 40% through automation and parallel jobs.</li>
+          <li>Managed <strong>750+ Linux servers</strong> - automated patching, performance tuning, monitoring for 99.99% system availability.</li>
+          <li>Deployed production <strong>EKS clusters</strong> with Helm charts, ingress configs, and zero-downtime upgrades across dev/staging/prod.</li>
+          <li><strong>Karpenter spot scaling</strong> on EKS cutting compute costs 30-40%.</li>
+          <li>Multi-layered <strong>AWS backup strategies</strong> with 60-day PITR; reduced storage spend 25% via snapshot lifecycle policies.</li>
+          <li>Led AWS migration - deployment time reduced 70%, provisioning from days to hours.</li>
+          <li>Hardened security via <strong>IAM/SSM/KMS</strong> controls - mitigated 100+ vulnerabilities, 15% faster response time.</li>
         </ul>
+        <div class="exp-tech">
+          <span class="exp-tech-tag">AWS</span><span class="exp-tech-tag">EKS</span><span class="exp-tech-tag">Terraform</span><span class="exp-tech-tag">Jenkins</span><span class="exp-tech-tag">GitLab CI</span><span class="exp-tech-tag">Karpenter</span><span class="exp-tech-tag">Helm</span><span class="exp-tech-tag">Python</span><span class="exp-tech-tag">CloudFormation</span>
+        </div>
       </div>
 
       <div class="timeline-card">
         <div class="exp-header">
           <div>
-            <div class="exp-company">Tata Consultancy Services <span>- Global IT Service Company</span></div>
+            <div class="exp-company">Tata Consultancy Services <span>- Global IT Services</span></div>
             <div class="exp-role">DevOps Engineer</div>
           </div>
           <span class="exp-date">Feb 2019 - Sep 2021</span>
         </div>
+        <div class="exp-metrics">
+          <div class="exp-metric"><span class="exp-metric-num">1st</span><span class="exp-metric-label">BaNCS on AWS</span></div>
+          <div class="exp-metric"><span class="exp-metric-num">50%</span><span class="exp-metric-label">Manual Effort Reduced</span></div>
+        </div>
         <ul class="exp-bullets">
-          <li>Led the <strong>first deployment of BaNCS core banking solution on AWS</strong> for a major financial client, driving cloud adoption in a regulated environment.</li>
-          <li>Designed and implemented a secure <strong>AWS infrastructure</strong> using EC2 (AMI-based), VPC, Security Groups, Route 53, EFS, and CloudWatch for high availability and centralized monitoring.</li>
-          <li>Installed and configured <strong>JBoss Application Server (7.1 &amp; 7.2)</strong> in domain mode on RHEL, enabling clustering and failover support.</li>
-          <li>Configured <strong>Apache HTTP Server (reverse proxy)</strong> and HAProxy for load balancing, achieving reliable traffic routing and scaling for web applications.</li>
-          <li>Built multiple <strong>Continuous Deployment pipelines</strong> with Jenkins and GitLab CI, boosting release frequency and system reliability.</li>
-          <li>Developed custom <strong>Bash scripts and cron jobs</strong> to automate system tasks, reducing manual effort by <strong>50%</strong>.</li>
-          <li>Built monitoring and alerting with <strong>AWS CloudWatch</strong>, supporting proactive issue detection and operational visibility.</li>
+          <li>Led the <strong>first deployment of BaNCS core banking on AWS</strong> for a major financial client - cloud adoption in a regulated environment.</li>
+          <li>Designed secure <strong>AWS infrastructure</strong> - EC2, VPC, Security Groups, Route 53, EFS, CloudWatch for HA and monitoring.</li>
+          <li>Configured <strong>JBoss Application Server</strong> in domain mode on RHEL with clustering and failover support.</li>
+          <li><strong>Apache reverse proxy + HAProxy</strong> for load balancing and reliable traffic routing at scale.</li>
+          <li>Built <strong>CI/CD pipelines</strong> with Jenkins and GitLab CI, boosting release frequency and reliability.</li>
+          <li>Custom <strong>Bash scripts and cron jobs</strong> automating system tasks - 50% manual effort reduction.</li>
         </ul>
+        <div class="exp-tech">
+          <span class="exp-tech-tag">AWS</span><span class="exp-tech-tag">EC2</span><span class="exp-tech-tag">Jenkins</span><span class="exp-tech-tag">GitLab CI</span><span class="exp-tech-tag">JBoss</span><span class="exp-tech-tag">HAProxy</span><span class="exp-tech-tag">CloudWatch</span><span class="exp-tech-tag">Bash</span>
+        </div>
       </div>
 
     </div>
@@ -700,8 +771,28 @@
 
       <a href="https://github.com/abdusirshad/halo-platform-showcase" target="_blank" class="project-card featured">
         <span class="project-badge">Production</span>
+        <div class="project-arch">
+          <svg viewBox="0 0 400 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="25" width="70" height="30" rx="6" stroke="#3B82F6" stroke-width="1" opacity="0.6"/><text x="35" y="44" text-anchor="middle" fill="#A1A1AA" font-size="8" font-family="Inter">User Request</text>
+            <path d="M70 40 L95 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+            <rect x="95" y="25" width="65" height="30" rx="6" stroke="#3B82F6" stroke-width="1.2"/><text x="127" y="44" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter" font-weight="600">FastAPI</text>
+            <path d="M160 40 L185 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+            <rect x="185" y="25" width="70" height="30" rx="6" stroke="#3B82F6" stroke-width="1.2"/><text x="220" y="38" text-anchor="middle" fill="#fff" font-size="7" font-family="Inter" font-weight="600">Azure OpenAI</text><text x="220" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">gpt-4o</text>
+            <path d="M255 40 L280 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+            <rect x="280" y="25" width="55" height="30" rx="6" stroke="#3B82F6" stroke-width="1" opacity="0.8"/><text x="307" y="38" text-anchor="middle" fill="#A1A1AA" font-size="7" font-family="Inter">pgvector</text><text x="307" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">1536-dim</text>
+            <path d="M335 40 L360 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+            <rect x="360" y="25" width="38" height="30" rx="6" stroke="#3B82F6" stroke-width="1" opacity="0.6"/><text x="379" y="44" text-anchor="middle" fill="#A1A1AA" font-size="7" font-family="Inter">GPU</text>
+            <rect x="95" y="0" width="160" height="14" rx="4" fill="rgba(59,130,246,0.08)"/><text x="175" y="10" text-anchor="middle" fill="#3B82F6" font-size="6.5" font-family="Inter" font-weight="600">AKS + Argo Workflows</text>
+            <rect x="95" y="66" width="160" height="14" rx="4" fill="rgba(59,130,246,0.05)"/><text x="175" y="76" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">Trivy > ACR > Helm > AKS</text>
+          </svg>
+        </div>
         <h3>TRecos - Real-Time Recommendation Engine</h3>
-        <p>Production AKS platform delivering real-time AI recommendations. GPU node pools for model inference, Argo Workflows for training orchestration, Azure OpenAI + pgvector RAG pipeline, and full DevSecOps CI/CD - deployed for enterprise banking with banking-grade security and compliance.</p>
+        <p>Production AKS platform delivering real-time AI recommendations. GPU node pools for model inference, Argo Workflows for training orchestration, Azure OpenAI + pgvector RAG pipeline, and full DevSecOps CI/CD - deployed for enterprise banking.</p>
+        <div class="project-metrics">
+          <span class="project-metric">Sub-second latency</span>
+          <span class="project-metric">99.9% uptime</span>
+          <span class="project-metric">Model-to-prod &lt;3 days</span>
+        </div>
         <div class="project-tags">
           <span class="project-tag">Azure OpenAI</span>
           <span class="project-tag">AKS + GPU</span>
@@ -715,8 +806,28 @@
 
       <a href="https://github.com/abdusirshad/numo-sdlc-platform-showcase" target="_blank" class="project-card featured">
         <span class="project-badge">Production</span>
+        <div class="project-arch">
+          <svg viewBox="0 0 400 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="25" width="55" height="30" rx="6" stroke="#3B82F6" stroke-width="1.2"/><text x="27" y="38" text-anchor="middle" fill="#fff" font-size="7.5" font-family="Inter" font-weight="600">React</text><text x="27" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">MSAL SSO</text>
+            <path d="M55 40 L80 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+            <rect x="80" y="25" width="65" height="30" rx="6" stroke="#3B82F6" stroke-width="1.2"/><text x="112" y="38" text-anchor="middle" fill="#fff" font-size="7.5" font-family="Inter" font-weight="600">FastAPI</text><text x="112" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">6 modules</text>
+            <path d="M145 40 L170 40" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+            <rect x="170" y="25" width="70" height="30" rx="6" stroke="#3B82F6" stroke-width="1.2"/><text x="205" y="38" text-anchor="middle" fill="#fff" font-size="7" font-family="Inter" font-weight="600">Azure OpenAI</text><text x="205" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">RAG + SSE</text>
+            <path d="M240 33 L265 20" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.4"/>
+            <path d="M240 47 L265 60" stroke="#3B82F6" stroke-width="1" stroke-dasharray="3 2" opacity="0.4"/>
+            <rect x="265" y="8" width="55" height="24" rx="5" stroke="#3B82F6" stroke-width="0.8" opacity="0.6"/><text x="292" y="23" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">Jira OAuth</text>
+            <rect x="265" y="48" width="65" height="24" rx="5" stroke="#3B82F6" stroke-width="0.8" opacity="0.6"/><text x="297" y="63" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">Confluence</text>
+            <rect x="340" y="25" width="58" height="30" rx="6" stroke="#3B82F6" stroke-width="0.8" opacity="0.5"/><text x="369" y="38" text-anchor="middle" fill="#A1A1AA" font-size="6.5" font-family="Inter">Cosmos DB</text><text x="369" y="49" text-anchor="middle" fill="#A1A1AA" font-size="6" font-family="Inter">pgvector</text>
+            <path d="M240 40 L340 40" stroke="#3B82F6" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.3"/>
+          </svg>
+        </div>
         <h3>NUMO - AI-Powered SDLC Automation</h3>
-        <p>AI delivery platform at First Abu Dhabi Bank (FAB, UAE) automating BRD authoring, Jira story generation, Confluence documentation, and BDD test creation via RAG pipelines. Azure AD RBAC across 6 product modules, SSE streaming, Jira &amp; Confluence OAuth 2.0, Langfuse LLM tracing.</p>
+        <p>AI delivery platform at First Abu Dhabi Bank (FAB, UAE) automating BRD authoring, Jira story generation, Confluence documentation, and BDD test creation via RAG pipelines. Azure AD RBAC across 6 modules, Langfuse LLM tracing.</p>
+        <div class="project-metrics">
+          <span class="project-metric">3-5 days to 4 hrs</span>
+          <span class="project-metric">6 modules</span>
+          <span class="project-metric">FAB UAE (enterprise)</span>
+        </div>
         <div class="project-tags">
           <span class="project-tag">Azure OpenAI gpt-4o</span>
           <span class="project-tag">RAG pgvector</span>
